@@ -6,3 +6,18 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
