@@ -1,0 +1,22 @@
+.header {
+    background-color: #FFFFFF;
+    color: black;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.logo {
+    height: 40px;
+    margin-left: 10px;
+}
+
+.title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
