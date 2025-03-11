@@ -16,7 +16,8 @@ html, body {
 footer {
     position: fixed;
     bottom: 0;
-    width: 100%;
+    left: 0;
+    width: 100vw;
     background-color: #00802F;
     padding: 10px 0;
     text-align: center;
