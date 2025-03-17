@@ -15,9 +15,3 @@ body {
     text-align: center;
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
-
-.chat-container {
-    width: 100%;
-    max-width: 500px;
-    margin: auto;
-}

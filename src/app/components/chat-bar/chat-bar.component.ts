@@ -12,7 +12,6 @@ export class ChatBarComponent {
 chatMessage: string = '';
 
 addMessage(message: string): void {
-  // Add the message to the chat
   console.log(this.chatMessage);
   alert(message);
 }
