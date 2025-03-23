@@ -1,35 +1,17 @@
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.main-content {
-    flex: 1;
-}
-
 footer {
     position: fixed;
     bottom: 0;
-    left: 0;
     width: 100vw;
+    height: 40px;
     background-color: #00802F;
     padding: 10px 0;
-    text-align: center;
-    border-top: 1px solid #e9ecef;
-    font-size: 14px;
-    color: #ffffff;
-    font-weight: 500;
-    z-index: 1000;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
-    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 .footer-content {
+    font-size: 13px;
     text-align: center;
+    color: #ffffff;
+    font-weight: 500;
+    z-index: 1000;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
