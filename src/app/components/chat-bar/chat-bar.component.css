@@ -1,7 +1,7 @@
 .chat-bar {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
     margin-top: 10px;
   }
