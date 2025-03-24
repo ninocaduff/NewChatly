@@ -20,4 +20,12 @@ addMessage(message: string): void {
   this.submitMessage.emit(messageToSend);
   }
 
+  onKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault(); // prevent newline
+      this.addMessage(this.chatMessage); // send
+      this.chatMessage = ''; // clear textarea
+    }
+  }
+
 }

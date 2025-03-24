@@ -4,16 +4,14 @@
       class="form-control chat-textarea"
       placeholder="Schreibe eine Nachricht..."
       [(ngModel)]="chatMessage"
-      (keydown.enter)="addMessage(chatMessage)">
+      (keydown)="onKeyDown($event)">
     </textarea>
   
-    
     <button 
       class="btn btn-primary chat-send-button" 
       [disabled]="!chatMessage" 
       (click)="addMessage(chatMessage)">
       Senden
     </button>
-</div>
-  
+  </div>
   
