@@ -5,6 +5,7 @@
     [(ngModel)]="chatMessage"
         (keyup.enter)="addMessage(chatMessage)">
 </textarea>
+
 <button class="btn btn-primary" [disabled]="!chatMessage" (click)="addMessage(chatMessage)">
     Senden
 </button>

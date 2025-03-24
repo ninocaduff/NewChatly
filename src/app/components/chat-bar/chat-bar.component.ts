@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,11 +9,15 @@ import { FormsModule } from '@angular/forms';
 })
 export class ChatBarComponent {
 
-chatMessage: string = '';
+@Output() submitMessage= new EventEmitter<string>();
+
+chatMessage = '';
 
 addMessage(message: string): void {
-  console.log(this.chatMessage);
-  alert(message);
-}
+  const timestamp = new Date().toLocaleString('de') ;
+  const messageToSend = `<b>${timestamp}</b> - ${message}<br>`;
+  
+  this.submitMessage.emit(messageToSend);
+  }
 
 }
