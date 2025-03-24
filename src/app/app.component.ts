@@ -11,7 +11,7 @@ import { ChatHistoryComponent } from "./components/chat-history/chat-history.com
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'ChatApp';
+  title = 'Chatly';
 
   message='';
 

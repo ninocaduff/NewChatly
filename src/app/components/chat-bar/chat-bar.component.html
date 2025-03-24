@@ -1,11 +1,19 @@
-<textarea 
-    rows="2"
-    class="form-control"
-    placeholder="Schreibe eine Nachricht..."
-    [(ngModel)]="chatMessage"
-        (keyup.enter)="addMessage(chatMessage)">
-</textarea>
-
-<button class="btn btn-primary" [disabled]="!chatMessage" (click)="addMessage(chatMessage)">
-    Senden
-</button>
+<div class="chat-bar">
+    <textarea 
+      rows="3"
+      class="form-control chat-textarea"
+      placeholder="Schreibe eine Nachricht..."
+      [(ngModel)]="chatMessage"
+      (keydown.enter)="addMessage(chatMessage)">
+    </textarea>
+  
+    
+    <button 
+      class="btn btn-primary chat-send-button" 
+      [disabled]="!chatMessage" 
+      (click)="addMessage(chatMessage)">
+      Senden
+    </button>
+</div>
+  
+  

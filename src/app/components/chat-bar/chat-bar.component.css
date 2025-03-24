@@ -1,0 +1,19 @@
+.chat-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .chat-textarea {
+    flex-grow: 1;        /* nimmt den verfügbaren Platz ein */
+    resize: none;        /* verhindert Größenänderung per Drag */
+    width: 250px;
+  }
+
+  .chat-send-button {
+    background-color: #00802F;
+    border-color: #00802F;
+  }
+  

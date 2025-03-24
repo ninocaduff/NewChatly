@@ -1,15 +1,23 @@
 .header {
     background-color: #FFFFFF;
-    color: black;
+    color: #000000;
     padding: 10px;
     display: flex;
     align-items: center;
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-.logo {
+.hsglogo {
     height: 40px;
     margin-left: 10px;
+}
+
+.chatlylogo {
+    height: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
 }
 
 .title {
