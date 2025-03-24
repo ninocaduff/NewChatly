@@ -14,11 +14,17 @@ export class ChatBarComponent {
 chatMessage = '';
 
 addMessage(message: string): void {
-  const timestamp = new Date().toLocaleString('de') ;
-  const messageToSend = `<b>${timestamp}</b> - ${message}<br>`;
-  
+  const now = new Date();
+  const time = now.toLocaleTimeString('de', {
+    hour: '2-digit',
+    minute: '2-digit'
+  }); // e.g. 22:54
+
+  const messageToSend = `<b>${time}</b> - ${message}<br>`;
   this.submitMessage.emit(messageToSend);
-  }
+  this.chatMessage = ''; // clear textarea
+}
+
 
   onKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Enter' && !event.shiftKey) {

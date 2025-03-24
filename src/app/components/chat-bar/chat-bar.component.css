@@ -8,8 +8,8 @@
   
   .chat-textarea {
     flex-grow: 1;        /* nimmt den verfügbaren Platz ein */
-    resize: none;        /* verhindert Größenänderung per Drag */
-    width: 250px;
+    resize: none;        /* verhindert Grössenänderung per Drag */
+    width: 400px;
   }
 
   .chat-send-button {

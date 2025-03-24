@@ -13,9 +13,9 @@ import { ChatHistoryComponent } from "./components/chat-history/chat-history.com
 export class AppComponent {
   title = 'Chatly';
 
-  message='';
+  fullHistory: string = '';
 
-  messageSubmitted(message: string): void {
-    this.message = message;
+  messageSubmitted(message: string):  void {
+    this.fullHistory += message; // append to the history
   }
 }
