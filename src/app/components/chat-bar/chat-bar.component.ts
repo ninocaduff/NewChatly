@@ -18,13 +18,11 @@ addMessage(message: string): void {
   const time = now.toLocaleTimeString('de', {
     hour: '2-digit',
     minute: '2-digit'
-  });
+    });
 
   const messageToSend = `<b>${time}</b> - ${message}<br>`;
   this.submitMessage.emit(messageToSend);
-}
-
-
+  }
 
 onKeyDown(event: KeyboardEvent): void {
   if (event.key === 'Enter' && !event.shiftKey) {
@@ -35,8 +33,6 @@ onKeyDown(event: KeyboardEvent): void {
 
     this.addMessage(trimmed);
     this.chatMessage = ''; // clear textarea
+    }
   }
-}
-
-
 }

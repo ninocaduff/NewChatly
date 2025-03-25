@@ -1,5 +1,5 @@
 .form-control {
-    max-height: 200px;         /* limit height */
+    max-height: 300px;         /* limit height */
     overflow-y: auto;          /* scroll when too long */
     width: 400px;
     word-wrap: break-word;     /* handle long words/messages */

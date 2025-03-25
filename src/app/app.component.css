@@ -28,7 +28,7 @@ body {
     flex-grow: 1;
     display: flex;
     justify-content: center;
-    padding: 200px 0;
+    padding: 400px 0;
     overflow-y: auto;
   }
   
