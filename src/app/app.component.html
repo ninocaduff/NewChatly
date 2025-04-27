@@ -13,6 +13,7 @@
     </div>
   </main>
 </div>
+<app-nickname-dialog *ngIf="showNicknameDialog" (nicknameSubmitted)="setNickname($event)"></app-nickname-dialog>
 <app-footer></app-footer>
 
 

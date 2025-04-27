@@ -7,13 +7,13 @@ body {
     padding: 0;
 }
 
+
 .wrapper {
     font-family: 'Montserrat', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 50vh;
-    text-align: center;
 }
 
 .chat-page {
@@ -37,3 +37,13 @@ body {
     justify-content: center;
   }
   
+.message-container {
+  text-align: left !important;
+
+}
+
+.message-nickname {
+  color: grey;
+    font-weight: bold;
+    font-size: 12px;
+}
