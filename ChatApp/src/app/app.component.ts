@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
       this.fetchChatHistory();
       
       // Setze ein Intervall, um den Chat-Verlauf alle 2 Sekunden zu aktualisieren
-      setInterval(() => this.fetchChatHistory(), 2000);
+      setInterval(() => this.fetchChatHistory(), 1000);
     }
   }
 
