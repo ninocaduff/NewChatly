@@ -1,6 +1,6 @@
 // src/index.ts
 import express, { Request, Response } from 'express';
-
+import cors from 'cors'; // ✅ Import cors
 // TypeScript-Interface für unsere Nachrichtenstruktur
 interface Message {
   username: string;
@@ -12,6 +12,8 @@ interface Message {
 const chatHistory: Message[] = [];
 
 const app = express();
+app.use(cors()); // ✅ Allow all origins
+
 app.use(express.json());
 
 // POST-Endpunkt zum Hinzufügen einer Nachricht

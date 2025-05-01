@@ -3,9 +3,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from "./components/footer/footer.component";
 import { ChatBarComponent } from './components/chat-bar/chat-bar.component';
 import { ChatHistoryComponent } from "./components/chat-history/chat-history.component";
-import { UserProfileService } from './services/user-profile.service'; // Neuer Service
-import { NicknameDialogComponent } from './components/nickname-dialog/nickname-dialog.component'; // Neue Komponente
+import { UserProfileService } from './services/user-profile.service'; 
+import { NicknameDialogComponent } from './components/nickname-dialog/nickname-dialog.component';
 import { NgIf } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -19,25 +20,77 @@ export class AppComponent implements OnInit {
   nickname: string = '';
   showNicknameDialog: boolean = true;
 
-  constructor(private userProfileService: UserProfileService) {}
+  constructor(
+    private userProfileService: UserProfileService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
     // Versuche, den gespeicherten Nickname zu laden
     this.nickname = this.userProfileService.getNickname();
     this.showNicknameDialog = !this.nickname;
+    
+    if (this.nickname) {
+      // Lade den Chat-Verlauf vom Server
+      this.fetchChatHistory();
+    }
+  }
+
+  // Neue Methode zum Abrufen des Chat-Verlaufs
+  fetchChatHistory(): void {
+    this.http.get<any[]>('http://localhost:3000/api/messages').subscribe({
+      next: (messages) => {
+        this.fullHistory = '';
+        messages.forEach(msg => {
+          const time = msg.time || '';
+          const formattedMsg = `  <div class="container my-2">
+  <div class="d-flex flex-column bg-light p-2 rounded">
+    <div class="d-flex justify-content-between">
+      <small class="text-primary" title="${msg.username}">${msg.username}</small>
+      <small class="text-muted">${time}</small>
+    </div>
+    <div class="mt-1">
+      <span>${msg.message}</span>
+    </div>
+  </div>
+</div>`;
+          this.fullHistory += formattedMsg;
+        });
+      },
+      error: (error) => {
+        console.error('Error fetching chat history:', error);
+      }
+    });
   }
 
   messageSubmitted(message: string): void {
-    // Füge den Nickname zu jeder Nachricht hinzu
-    const formattedMessage = this.formatMessageWithNickname(message);
-    this.fullHistory += formattedMessage;
+    // Extrahiere den Text aus der formatierten Nachricht
+    const timeMatch = message.match(/<b>(.*?)<\/b> - (.*?)<br>/);
+    if (!timeMatch || timeMatch.length < 3) return;
+    
+    const messageText = timeMatch[2];
+    
+    // Sende die Nachricht an die API
+    this.http.post('http://localhost:3000/api/messages', {
+      username: this.nickname,
+      message: messageText
+    }).subscribe({
+      next: () => {
+        // Nach erfolgreichem Senden den Chat-Verlauf neu laden
+        this.fetchChatHistory();
+      },
+      error: (error) => {
+        console.error('Error sending message:', error);
+        
+        // Zeige die Nachricht lokal an, falls API-Aufruf fehlschlägt
+        const formattedMessage = this.formatMessageWithNickname(message);
+        this.fullHistory += formattedMessage;
+      }
+    });
   }
 
   /**
-   * Formatiert die Nachricht mit dem Nickname
-   * Der Nickname wird nur am Anfang jeder Nachricht (nicht jeder Zeile) angezeigt
-   * @param message Die zu formatierende Nachricht
-   * @returns Formatierte Nachricht mit Nickname
+   * Formatiert die Nachricht mit dem Nickname (für lokale Anzeige)
    */
   private formatMessageWithNickname(message: string): string {
     // Extrahiere Zeit und Inhalt aus der Nachricht
@@ -48,7 +101,6 @@ export class AppComponent implements OnInit {
     const content = timeMatch[2];
     
     // Verarbeite mehrzeilige Nachrichten
-    // Ersetze \n mit <br> für korrekte HTML-Darstellung
     const formattedContent = content.replace(/\n/g, '<br>');
     
     // Formatiere die Nachricht mit Nickname
@@ -69,6 +121,8 @@ export class AppComponent implements OnInit {
     this.nickname = nickname;
     this.userProfileService.saveNickname(nickname);
     this.showNicknameDialog = false;
+    
+    // Lade den Chat-Verlauf nach dem Login
+    this.fetchChatHistory();
   }
 }
-
