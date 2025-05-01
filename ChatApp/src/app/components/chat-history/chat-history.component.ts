@@ -6,7 +6,6 @@ import { AfterViewChecked, Component, ElementRef, Input, ViewChild } from '@angu
   templateUrl: './chat-history.component.html',
   styleUrl: './chat-history.component.css'
 })
-
 export class ChatHistoryComponent implements AfterViewChecked {
   @Input() history: string = '';
 

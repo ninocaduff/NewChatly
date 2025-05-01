@@ -1,6 +1,6 @@
 .form-control {
-  width: 80vw; /* 80 % der Bildschirmbreite */
-  height: 400px;
+  width: 60vw; /* 80 % der Bildschirmbreite */
+  height: 50vh;
   overflow-y: auto;
   padding: 16px;
   margin: 20px auto;
@@ -12,4 +12,9 @@
   font-size: 14px;
   line-height: 1.5;
   box-sizing: border-box;
+}
+
+.chat-name {
+  color: #00802F;
+  font-weight: bold;
 }
