@@ -1,20 +1,16 @@
 <div class="chat-bar">
-  <label for="chat-message" class="sr-only">Nachricht schreiben</label>
   <textarea 
-    id="chat-message"
     rows="3"
     class="form-control chat-textarea"
     placeholder="Schreibe eine Nachricht..."
     [(ngModel)]="chatMessage"
-    (keydown)="onKeyDown($event)"
-    aria-label="Nachricht schreiben">
+    (keydown)="onKeyDown($event)">
   </textarea>
 
   <button 
     class="btn btn-primary chat-send-button" 
     [disabled]="!chatMessage" 
-    (click)="addMessage(chatMessage)"
-    aria-label="Nachrichteneingabefeld">
+    (click)="addMessage(chatMessage)">
     Senden
   </button>
 </div>
