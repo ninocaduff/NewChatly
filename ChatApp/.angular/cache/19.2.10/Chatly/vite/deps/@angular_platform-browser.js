@@ -1,17 +1,19 @@
 import {
   withHttpTransferCache
-} from "./chunk-XXLTBW6E.js";
+} from "./chunk-V7JBZ437.js";
 import {
   CommonModule,
-  DOCUMENT,
   DomAdapter,
+  getDOM,
+  setRootDomAdapter
+} from "./chunk-M3UQ4PLG.js";
+import {
+  DOCUMENT,
   PLATFORM_BROWSER_ID,
   XhrFactory,
-  getDOM,
   isPlatformServer,
-  parseCookieValue,
-  setRootDomAdapter
-} from "./chunk-B32Y6TVP.js";
+  parseCookieValue
+} from "./chunk-RAWCEAR3.js";
 import {
   APP_ID,
   ApplicationModule,
@@ -72,141 +74,9 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-DTYUS5ON.js";
+} from "./chunk-27F7Q2TA.js";
 
-// node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs
-var GenericBrowserDomAdapter = class extends DomAdapter {
-  supportsDOMEvents = true;
-};
-var BrowserDomAdapter = class _BrowserDomAdapter extends GenericBrowserDomAdapter {
-  static makeCurrent() {
-    setRootDomAdapter(new _BrowserDomAdapter());
-  }
-  onAndCancel(el, evt, listener, options) {
-    el.addEventListener(evt, listener, options);
-    return () => {
-      el.removeEventListener(evt, listener, options);
-    };
-  }
-  dispatchEvent(el, evt) {
-    el.dispatchEvent(evt);
-  }
-  remove(node) {
-    node.remove();
-  }
-  createElement(tagName, doc) {
-    doc = doc || this.getDefaultDocument();
-    return doc.createElement(tagName);
-  }
-  createHtmlDocument() {
-    return document.implementation.createHTMLDocument("fakeTitle");
-  }
-  getDefaultDocument() {
-    return document;
-  }
-  isElementNode(node) {
-    return node.nodeType === Node.ELEMENT_NODE;
-  }
-  isShadowRoot(node) {
-    return node instanceof DocumentFragment;
-  }
-  /** @deprecated No longer being used in Ivy code. To be removed in version 14. */
-  getGlobalEventTarget(doc, target) {
-    if (target === "window") {
-      return window;
-    }
-    if (target === "document") {
-      return doc;
-    }
-    if (target === "body") {
-      return doc.body;
-    }
-    return null;
-  }
-  getBaseHref(doc) {
-    const href = getBaseElementHref();
-    return href == null ? null : relativePath(href);
-  }
-  resetBaseElement() {
-    baseElement = null;
-  }
-  getUserAgent() {
-    return window.navigator.userAgent;
-  }
-  getCookie(name) {
-    return parseCookieValue(document.cookie, name);
-  }
-};
-var baseElement = null;
-function getBaseElementHref() {
-  baseElement = baseElement || document.querySelector("base");
-  return baseElement ? baseElement.getAttribute("href") : null;
-}
-function relativePath(url) {
-  return new URL(url, document.baseURI).pathname;
-}
-var BrowserGetTestability = class {
-  addToWindow(registry) {
-    _global["getAngularTestability"] = (elem, findInAncestors = true) => {
-      const testability = registry.findTestabilityInTree(elem, findInAncestors);
-      if (testability == null) {
-        throw new RuntimeError(5103, (typeof ngDevMode === "undefined" || ngDevMode) && "Could not find testability for element.");
-      }
-      return testability;
-    };
-    _global["getAllAngularTestabilities"] = () => registry.getAllTestabilities();
-    _global["getAllAngularRootElements"] = () => registry.getAllRootElements();
-    const whenAllStable = (callback) => {
-      const testabilities = _global["getAllAngularTestabilities"]();
-      let count = testabilities.length;
-      const decrement = function() {
-        count--;
-        if (count == 0) {
-          callback();
-        }
-      };
-      testabilities.forEach((testability) => {
-        testability.whenStable(decrement);
-      });
-    };
-    if (!_global["frameworkStabilizers"]) {
-      _global["frameworkStabilizers"] = [];
-    }
-    _global["frameworkStabilizers"].push(whenAllStable);
-  }
-  findTestabilityInTree(registry, elem, findInAncestors) {
-    if (elem == null) {
-      return null;
-    }
-    const t = registry.getTestability(elem);
-    if (t != null) {
-      return t;
-    } else if (!findInAncestors) {
-      return null;
-    }
-    if (getDOM().isShadowRoot(elem)) {
-      return this.findTestabilityInTree(registry, elem.host, true);
-    }
-    return this.findTestabilityInTree(registry, elem.parentElement, true);
-  }
-};
-var BrowserXhr = class _BrowserXhr {
-  build() {
-    return new XMLHttpRequest();
-  }
-  static ɵfac = function BrowserXhr_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _BrowserXhr)();
-  };
-  static ɵprov = ɵɵdefineInjectable({
-    token: _BrowserXhr,
-    factory: _BrowserXhr.ɵfac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BrowserXhr, [{
-    type: Injectable
-  }], null, null);
-})();
+// node_modules/@angular/platform-browser/fesm2022/dom_renderer-DGKzginR.mjs
 var EVENT_MANAGER_PLUGINS = new InjectionToken(ngDevMode ? "EventManagerPlugins" : "");
 var EventManager = class _EventManager {
   _zone;
@@ -915,6 +785,138 @@ var EmulatedEncapsulationDomRenderer2 = class extends NoneEncapsulationDomRender
     return el;
   }
 };
+
+// node_modules/@angular/platform-browser/fesm2022/browser-X3l5Bmdq.mjs
+var BrowserDomAdapter = class _BrowserDomAdapter extends DomAdapter {
+  supportsDOMEvents = true;
+  static makeCurrent() {
+    setRootDomAdapter(new _BrowserDomAdapter());
+  }
+  onAndCancel(el, evt, listener, options) {
+    el.addEventListener(evt, listener, options);
+    return () => {
+      el.removeEventListener(evt, listener, options);
+    };
+  }
+  dispatchEvent(el, evt) {
+    el.dispatchEvent(evt);
+  }
+  remove(node) {
+    node.remove();
+  }
+  createElement(tagName, doc) {
+    doc = doc || this.getDefaultDocument();
+    return doc.createElement(tagName);
+  }
+  createHtmlDocument() {
+    return document.implementation.createHTMLDocument("fakeTitle");
+  }
+  getDefaultDocument() {
+    return document;
+  }
+  isElementNode(node) {
+    return node.nodeType === Node.ELEMENT_NODE;
+  }
+  isShadowRoot(node) {
+    return node instanceof DocumentFragment;
+  }
+  /** @deprecated No longer being used in Ivy code. To be removed in version 14. */
+  getGlobalEventTarget(doc, target) {
+    if (target === "window") {
+      return window;
+    }
+    if (target === "document") {
+      return doc;
+    }
+    if (target === "body") {
+      return doc.body;
+    }
+    return null;
+  }
+  getBaseHref(doc) {
+    const href = getBaseElementHref();
+    return href == null ? null : relativePath(href);
+  }
+  resetBaseElement() {
+    baseElement = null;
+  }
+  getUserAgent() {
+    return window.navigator.userAgent;
+  }
+  getCookie(name) {
+    return parseCookieValue(document.cookie, name);
+  }
+};
+var baseElement = null;
+function getBaseElementHref() {
+  baseElement = baseElement || document.querySelector("base");
+  return baseElement ? baseElement.getAttribute("href") : null;
+}
+function relativePath(url) {
+  return new URL(url, document.baseURI).pathname;
+}
+var BrowserGetTestability = class {
+  addToWindow(registry) {
+    _global["getAngularTestability"] = (elem, findInAncestors = true) => {
+      const testability = registry.findTestabilityInTree(elem, findInAncestors);
+      if (testability == null) {
+        throw new RuntimeError(5103, (typeof ngDevMode === "undefined" || ngDevMode) && "Could not find testability for element.");
+      }
+      return testability;
+    };
+    _global["getAllAngularTestabilities"] = () => registry.getAllTestabilities();
+    _global["getAllAngularRootElements"] = () => registry.getAllRootElements();
+    const whenAllStable = (callback) => {
+      const testabilities = _global["getAllAngularTestabilities"]();
+      let count = testabilities.length;
+      const decrement = function() {
+        count--;
+        if (count == 0) {
+          callback();
+        }
+      };
+      testabilities.forEach((testability) => {
+        testability.whenStable(decrement);
+      });
+    };
+    if (!_global["frameworkStabilizers"]) {
+      _global["frameworkStabilizers"] = [];
+    }
+    _global["frameworkStabilizers"].push(whenAllStable);
+  }
+  findTestabilityInTree(registry, elem, findInAncestors) {
+    if (elem == null) {
+      return null;
+    }
+    const t = registry.getTestability(elem);
+    if (t != null) {
+      return t;
+    } else if (!findInAncestors) {
+      return null;
+    }
+    if (getDOM().isShadowRoot(elem)) {
+      return this.findTestabilityInTree(registry, elem.host, true);
+    }
+    return this.findTestabilityInTree(registry, elem.parentElement, true);
+  }
+};
+var BrowserXhr = class _BrowserXhr {
+  build() {
+    return new XMLHttpRequest();
+  }
+  static ɵfac = function BrowserXhr_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _BrowserXhr)();
+  };
+  static ɵprov = ɵɵdefineInjectable({
+    token: _BrowserXhr,
+    factory: _BrowserXhr.ɵfac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BrowserXhr, [{
+    type: Injectable
+  }], null, null);
+})();
 var DomEventsPlugin = class _DomEventsPlugin extends EventManagerPlugin {
   constructor(doc) {
     super(doc);
@@ -1149,15 +1151,13 @@ var INTERNAL_BROWSER_PLATFORM_PROVIDERS = [{
   multi: true
 }, {
   provide: DOCUMENT,
-  useFactory: _document,
-  deps: []
+  useFactory: _document
 }];
 var platformBrowser = createPlatformFactory(platformCore, "browser", INTERNAL_BROWSER_PLATFORM_PROVIDERS);
 var BROWSER_MODULE_PROVIDERS_MARKER = new InjectionToken(typeof ngDevMode === "undefined" || ngDevMode ? "BrowserModule Providers Marker" : "");
 var TESTABILITY_PROVIDERS = [{
   provide: TESTABILITY_GETTER,
-  useClass: BrowserGetTestability,
-  deps: []
+  useClass: BrowserGetTestability
 }, {
   provide: TESTABILITY,
   useClass: Testability,
@@ -1173,8 +1173,7 @@ var BROWSER_MODULE_PROVIDERS = [{
   useValue: "root"
 }, {
   provide: ErrorHandler,
-  useFactory: errorHandler,
-  deps: []
+  useFactory: errorHandler
 }, {
   provide: EVENT_MANAGER_PLUGINS,
   useClass: DomEventsPlugin,
@@ -1190,8 +1189,7 @@ var BROWSER_MODULE_PROVIDERS = [{
   useExisting: DomRendererFactory2
 }, {
   provide: XhrFactory,
-  useClass: BrowserXhr,
-  deps: []
+  useClass: BrowserXhr
 }, typeof ngDevMode === "undefined" || ngDevMode ? {
   provide: BROWSER_MODULE_PROVIDERS_MARKER,
   useValue: true
@@ -1229,6 +1227,8 @@ var BrowserModule = class _BrowserModule {
     }]
   }], () => [], null);
 })();
+
+// node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs
 var Meta = class _Meta {
   _doc;
   _dom;
@@ -1756,8 +1756,7 @@ var HammerModule = class _HammerModule {
       deps: [DOCUMENT, HAMMER_GESTURE_CONFIG, Injector, [new Optional(), HAMMER_LOADER]]
     }, {
       provide: HAMMER_GESTURE_CONFIG,
-      useClass: HammerGestureConfig,
-      deps: []
+      useClass: HammerGestureConfig
     }]
   });
 };
@@ -1772,8 +1771,7 @@ var HammerModule = class _HammerModule {
         deps: [DOCUMENT, HAMMER_GESTURE_CONFIG, Injector, [new Optional(), HAMMER_LOADER]]
       }, {
         provide: HAMMER_GESTURE_CONFIG,
-        useClass: HammerGestureConfig,
-        deps: []
+        useClass: HammerGestureConfig
       }]
     }]
   }], null, null);
@@ -1950,7 +1948,6 @@ function provideZoneJsCompatibilityDetector() {
 function provideClientHydration(...features) {
   const providers = [];
   const featuresKind = /* @__PURE__ */ new Set();
-  const hasHttpTransferCacheOptions = featuresKind.has(HydrationFeatureKind.HttpTransferCacheOptions);
   for (const {
     ɵproviders,
     ɵkind
@@ -1960,12 +1957,13 @@ function provideClientHydration(...features) {
       providers.push(ɵproviders);
     }
   }
+  const hasHttpTransferCacheOptions = featuresKind.has(HydrationFeatureKind.HttpTransferCacheOptions);
   if (typeof ngDevMode !== "undefined" && ngDevMode && featuresKind.has(HydrationFeatureKind.NoHttpTransferCache) && hasHttpTransferCacheOptions) {
     throw new Error("Configuration error: found both withHttpTransferCacheOptions() and withNoHttpTransferCache() in the same call to provideClientHydration(), which is a contradiction.");
   }
   return makeEnvironmentProviders([typeof ngDevMode !== "undefined" && ngDevMode ? provideZoneJsCompatibilityDetector() : [], withDomHydration(), featuresKind.has(HydrationFeatureKind.NoHttpTransferCache) || hasHttpTransferCacheOptions ? [] : withHttpTransferCache({}), providers]);
 }
-var VERSION = new Version("19.2.3");
+var VERSION = new Version("19.2.9");
 export {
   BrowserModule,
   By,
@@ -2000,17 +1998,29 @@ export {
   DomRendererFactory2 as ɵDomRendererFactory2,
   DomSanitizerImpl as ɵDomSanitizerImpl,
   HammerGesturesPlugin as ɵHammerGesturesPlugin,
-  INTERNAL_BROWSER_PLATFORM_PROVIDERS as ɵINTERNAL_BROWSER_PLATFORM_PROVIDERS,
   KeyEventsPlugin as ɵKeyEventsPlugin,
   SharedStylesHost as ɵSharedStylesHost,
-  getDOM as ɵgetDOM,
-  initDomAdapter as ɵinitDomAdapter
+  getDOM as ɵgetDOM
 };
 /*! Bundled license information:
 
+@angular/platform-browser/fesm2022/dom_renderer-DGKzginR.mjs:
+  (**
+   * @license Angular v19.2.9
+   * (c) 2010-2025 Google LLC. https://angular.io/
+   * License: MIT
+   *)
+
+@angular/platform-browser/fesm2022/browser-X3l5Bmdq.mjs:
+  (**
+   * @license Angular v19.2.9
+   * (c) 2010-2025 Google LLC. https://angular.io/
+   * License: MIT
+   *)
+
 @angular/platform-browser/fesm2022/platform-browser.mjs:
   (**
-   * @license Angular v19.2.3
+   * @license Angular v19.2.9
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)

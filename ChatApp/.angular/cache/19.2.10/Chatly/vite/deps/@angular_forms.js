@@ -1,6 +1,7 @@
 import {
   getDOM
-} from "./chunk-B32Y6TVP.js";
+} from "./chunk-M3UQ4PLG.js";
+import "./chunk-RAWCEAR3.js";
 import {
   ChangeDetectorRef,
   Directive,
@@ -47,7 +48,7 @@ import {
   ɵɵdirectiveInject,
   ɵɵgetInheritedFactory,
   ɵɵlistener
-} from "./chunk-DTYUS5ON.js";
+} from "./chunk-27F7Q2TA.js";
 
 // node_modules/@angular/forms/fesm2022/forms.mjs
 var BaseControlValueAccessor = class _BaseControlValueAccessor {
@@ -1037,7 +1038,6 @@ var ControlContainer = class extends AbstractControlDirective {
    * @description
    * The name for the control
    */
-  // TODO(issue/24571): remove '!'.
   name;
   /**
    * @description
@@ -2928,7 +2928,6 @@ var NgForm = class _NgForm extends ControlContainer {
    * Possible values: `'change'` | `'blur'` | `'submit'`.
    *
    */
-  // TODO(issue/24571): remove '!'.
   options;
   constructor(validators, asyncValidators, callSetDisabledState) {
     super();
@@ -3082,6 +3081,7 @@ var NgForm = class _NgForm extends ControlContainer {
     this.submittedReactive.set(true);
     syncPendingControls(this.form, this._directives);
     this.ngSubmit.emit($event);
+    this.form._events.next(new FormSubmittedEvent(this.control));
     return $event?.target?.method === "dialog";
   }
   /**
@@ -3100,6 +3100,7 @@ var NgForm = class _NgForm extends ControlContainer {
   resetForm(value = void 0) {
     this.form.reset(value);
     this.submittedReactive.set(false);
+    this.form._events.next(new FormResetEvent(this.form));
   }
   _setUpdateStrategy() {
     if (this.options && this.options.updateOn != null) {
@@ -3306,7 +3307,6 @@ var AbstractFormGroupDirective = class _AbstractFormGroupDirective extends Contr
    *
    * @internal
    */
-  // TODO(issue/24571): remove '!'.
   _parent;
   /** @nodoc */
   ngOnInit() {
@@ -3521,7 +3521,6 @@ var NgModel = class _NgModel extends NgControl {
    * @description
    * Tracks whether the control is disabled.
    */
-  // TODO(issue/24571): remove '!'.
   isDisabled;
   /**
    * @description
@@ -3544,7 +3543,6 @@ var NgModel = class _NgModel extends NgControl {
    * Defaults to 'change'. Possible values: `'change'` | `'blur'` | `'submit'`.
    *
    */
-  // TODO(issue/24571): remove '!'.
   options;
   /**
    * @description
@@ -3929,13 +3927,10 @@ var RadioControlValueAccessor = class _RadioControlValueAccessor extends BuiltIn
   _registry;
   _injector;
   /** @internal */
-  // TODO(issue/24571): remove '!'.
   _state;
   /** @internal */
-  // TODO(issue/24571): remove '!'.
   _control;
   /** @internal */
-  // TODO(issue/24571): remove '!'.
   _fn;
   setDisabledStateFired = false;
   /**
@@ -3951,14 +3946,12 @@ var RadioControlValueAccessor = class _RadioControlValueAccessor extends BuiltIn
    * @description
    * Tracks the name of the radio input element.
    */
-  // TODO(issue/24571): remove '!'.
   name;
   /**
    * @description
    * Tracks the name of the `FormControl` bound to the directive. The name corresponds
    * to a key in the parent `FormGroup` or `FormArray`.
    */
-  // TODO(issue/24571): remove '!'.
   formControlName;
   /**
    * @description
@@ -4157,7 +4150,6 @@ var FormControlDirective = class _FormControlDirective extends NgControl {
    * @description
    * Tracks the `FormControl` instance bound to the directive.
    */
-  // TODO(issue/24571): remove '!'.
   form;
   /**
    * @description
@@ -4933,7 +4925,6 @@ var FormControlName = class _FormControlName extends NgControl {
    * @description
    * Tracks the `FormControl` instance bound to the directive.
    */
-  // TODO(issue/24571): remove '!'.
   control;
   /**
    * @description
@@ -5250,7 +5241,6 @@ var NgSelectOption = class _NgSelectOption {
    * @description
    * ID of the option element
    */
-  // TODO(issue/24571): remove '!'.
   id;
   constructor(_element, _renderer, _select) {
     this._element = _element;
@@ -5481,7 +5471,6 @@ var ɵNgSelectMultipleOption = class _ɵNgSelectMultipleOption {
   _element;
   _renderer;
   _select;
-  // TODO(issue/24571): remove '!'.
   id;
   /** @internal */
   _value;
@@ -6712,7 +6701,7 @@ var UntypedFormBuilder = class _UntypedFormBuilder extends FormBuilder {
     }]
   }], null, null);
 })();
-var VERSION = new Version("19.2.3");
+var VERSION = new Version("19.2.9");
 var FormsModule = class _FormsModule {
   /**
    * @description
@@ -6865,7 +6854,7 @@ export {
 
 @angular/forms/fesm2022/forms.mjs:
   (**
-   * @license Angular v19.2.3
+   * @license Angular v19.2.9
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)

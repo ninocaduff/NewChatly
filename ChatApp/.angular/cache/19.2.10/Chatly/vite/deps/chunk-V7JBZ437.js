@@ -3,7 +3,7 @@ import {
   XhrFactory,
   isPlatformServer,
   parseCookieValue
-} from "./chunk-B32Y6TVP.js";
+} from "./chunk-RAWCEAR3.js";
 import {
   APP_BOOTSTRAP_LISTENER,
   ApplicationRef,
@@ -49,9 +49,9 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-DTYUS5ON.js";
+} from "./chunk-27F7Q2TA.js";
 
-// node_modules/@angular/common/fesm2022/http.mjs
+// node_modules/@angular/common/fesm2022/module-BHk9jdTn.mjs
 var HttpHandler = class {
 };
 var HttpBackend = class {
@@ -60,7 +60,6 @@ var HttpHeaders = class _HttpHeaders {
   /**
    * Internal map of lowercase header names to values.
    */
-  // TODO(issue/24571): remove '!'.
   headers;
   /**
    * Internal map of lowercased header names to the normalized
@@ -653,7 +652,6 @@ var HttpRequest = class _HttpRequest {
   /**
    * Outgoing headers for this request.
    */
-  // TODO(issue/24571): remove '!'.
   headers;
   /**
    * Shared and mutable context that can be used by interceptors
@@ -693,7 +691,6 @@ var HttpRequest = class _HttpRequest {
    * new HttpParams({fromString: 'angular=awesome'})
    * ```
    */
-  // TODO(issue/24571): remove '!'.
   params;
   /**
    * The outgoing URL with all URL parameters set.
@@ -858,7 +855,6 @@ var HttpResponseBase = class {
   /**
    * Type of the response, narrowed to either the full response or the header.
    */
-  // TODO(issue/24571): remove '!'.
   type;
   /**
    * Super-constructor for all responses.
@@ -2227,6 +2223,8 @@ var HttpClientJsonpModule = class _HttpClientJsonpModule {
     }]
   }], null, null);
 })();
+
+// node_modules/@angular/common/fesm2022/http.mjs
 var httpResource = (() => {
   const jsonFn = makeHttpResourceFn("json");
   jsonFn.arrayBuffer = makeHttpResourceFn("arraybuffer");
@@ -2320,9 +2318,15 @@ var HttpResourceImpl = class extends ResourceImpl {
               break;
           }
         },
-        error: (error) => send({
-          error
-        }),
+        error: (error) => {
+          if (error instanceof HttpErrorResponse) {
+            this._headers.set(error.headers);
+            this._statusCode.set(error.status);
+          }
+          send({
+            error
+          });
+        },
         complete: () => {
           if (resolve) {
             send({
@@ -2541,11 +2545,18 @@ export {
 };
 /*! Bundled license information:
 
+@angular/common/fesm2022/module-BHk9jdTn.mjs:
+  (**
+   * @license Angular v19.2.9
+   * (c) 2010-2025 Google LLC. https://angular.io/
+   * License: MIT
+   *)
+
 @angular/common/fesm2022/http.mjs:
   (**
-   * @license Angular v19.2.3
+   * @license Angular v19.2.9
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-XXLTBW6E.js.map
+//# sourceMappingURL=chunk-V7JBZ437.js.map

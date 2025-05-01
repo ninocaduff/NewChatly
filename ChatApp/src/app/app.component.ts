@@ -33,6 +33,9 @@ export class AppComponent implements OnInit {
     if (this.nickname) {
       // Lade den Chat-Verlauf vom Server
       this.fetchChatHistory();
+      
+      // Setze ein Intervall, um den Chat-Verlauf alle 2 Sekunden zu aktualisieren
+      setInterval(() => this.fetchChatHistory(), 2000);
     }
   }
 
