@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
 
   // Neue Methode zum Abrufen des Chat-Verlaufs
   fetchChatHistory(): void {
-    this.http.get<any[]>('http://localhost:3000/api/messages').subscribe({
+    this.http.get<any[]>('https://5e00-84-20-56-177.ngrok-free.app/api/messages').subscribe({
       next: (messages) => {
         this.fullHistory = '';
         messages.forEach(msg => {
@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
     const messageText = timeMatch[2];
     
     // Sende die Nachricht an die API
-    this.http.post('http://localhost:3000/api/messages', {
+    this.http.post('https://5e00-84-20-56-177.ngrok-free.app/api/messages', {
       username: this.nickname,
       message: messageText
     }).subscribe({
