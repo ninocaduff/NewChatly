@@ -20,6 +20,12 @@
   box-sizing: border-box;
 }
 
+.chat-textarea:focus {
+  outline: none; /* entfernt den blauen Standardrahmen */
+  border-color: #00802F; /* grüner Rand */
+  box-shadow: 0 0 0 2px rgba(0, 128, 47, 0.3); /* optional grüner Schein */
+}
+
 .chat-send-button {
   width: 100%;
   max-width: 200px;
