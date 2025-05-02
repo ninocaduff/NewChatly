@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
 
   // Neue Methode zum Abrufen des Chat-Verlaufs
   fetchChatHistory(): void {
-    this.http.get<any[]>('https://newchatly-backend.onrender.com/api/messages').subscribe({
+    this.http.get<any[]>('https://chatlyhsg.onrender.com/api/messages').subscribe({
       next: (messages) => {
         this.fullHistory = '';
         messages.forEach(msg => {
@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
     const messageText = timeMatch[2];
     
     // Sende die Nachricht an die API
-    this.http.post('https://newchatly-backend.onrender.com/api/messages', {
+    this.http.post('https://chatlyhsg.onrender.com/api/messages', {
       username: this.nickname,
       message: messageText
     }).subscribe({
