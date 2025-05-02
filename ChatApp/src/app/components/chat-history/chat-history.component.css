@@ -1,9 +1,9 @@
 .form-control {
-  width: 60vw; /* 80 % der Bildschirmbreite */
-  height: 50vh;
+  width: 60vw;
+  height: 40vh;
   overflow-y: auto;
   padding: 16px;
-  margin: 20px auto;
+  margin: 0px auto 90px auto; /* Abstand oben: 60px */
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -14,7 +14,13 @@
   box-sizing: border-box;
 }
 
+
 .chat-name {
   color: #00802F;
   font-weight: bold;
+}
+
+.message strong {
+  color: green !important; /* Erzwingt die grüne Farbe */
+  font-weight: bold; /* Beibehaltung der Fettschrift */
 }

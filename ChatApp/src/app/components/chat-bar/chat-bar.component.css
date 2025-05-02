@@ -35,3 +35,7 @@
 .chat-send-button:hover {
   background-color: #006622;
 }
+
+.chat-send-button:active {
+  background-color: #00802F;
+}

@@ -28,9 +28,11 @@ body {
     flex-grow: 1;
     display: flex;
     justify-content: center;
-    padding: 400px 0;
+    margin-top: clamp(80px, 25vh, 300px);
+    margin-bottom: 0;
     overflow-y: auto;
   }
+  
   
   .chat-footer {
     display: flex;
