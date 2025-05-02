@@ -1,5 +1,8 @@
 <div class="chat-bar position-relative">
+  <label for="messageInput" class="visually-hidden">Nachricht eingeben</label>
   <textarea 
+    id="messageInput"
+    aria-label="Nachricht eingeben"
     rows="3"
     maxlength="500"
     class="form-control chat-textarea pe-5"
@@ -9,14 +12,17 @@
   </textarea>
 
   <!-- Character counter inside textarea -->
-  <div class="char-counter">
-    {{ chatMessage.length }}/500
+  <div class="char-counter visually-hidden" aria-live="polite">
+    {{ chatMessage.length }}/500 Zeichen
   </div>
+  
 
   <button 
     class="btn btn-success chat-send-button mt-3" 
     [disabled]="!chatMessage.trim()" 
-    (click)="addMessage(chatMessage)">
+    (click)="addMessage(chatMessage)"
+    aria-label="Nachricht senden">
     <strong>Senden</strong>
   </button>
+
 </div>

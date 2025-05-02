@@ -1,1 +1,38 @@
-<p>nickname-dialog works!</p>
+<div 
+  class="nickname-dialog-overlay" 
+  role="dialog" 
+  aria-modal="true" 
+  aria-labelledby="nicknameDialogTitle">
+
+  <div class="nickname-dialog">
+    <!-- ✅ Sichtbarer Titel -->
+    <h2 id="nicknameDialogTitle">Willkommen bei Chatly!</h2>
+
+    <!-- ✅ Sichtbarer Untertitel -->
+    <p>Bitte gib deinen Nickname ein, um zu chatten.</p>
+
+    <form (ngSubmit)="submitNickname()" aria-label="Nickname Formular">
+      <label for="nicknameInput" class="visually-hidden">Dein Nickname</label>
+      <input 
+        id="nicknameInput"
+        name="nickname"
+        type="text" 
+        class="form-control chat-textarea pe-5"
+        [(ngModel)]="nickname"
+        placeholder="Dein Nickname"
+        (keydown.enter)="submitNickname()"
+        aria-label="Nickname eingeben"
+        required
+        aria-required="true"
+      >
+
+      <button 
+        type="submit"
+        class="btn btn-success chat-send-button mt-3"
+        [disabled]="!nickname.trim()"
+        aria-label="Nickname bestätigen und Chat starten">
+        Starten
+      </button>
+    </form>
+  </div>
+</div>

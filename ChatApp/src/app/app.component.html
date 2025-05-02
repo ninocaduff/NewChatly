@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="wrapper">
-  <main>
-    <h1>{{ title}}</h1>
+  <main role="main" aria-label="Chat-Anwendung">
+    <h1 class="visually-hidden">{{ title }}</h1>
     <div class="chat-page">
       <div class="chat-content">
         <app-chat-history [history]="fullHistory"></app-chat-history>
