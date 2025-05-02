@@ -13,14 +13,14 @@ import { FormsModule } from '@angular/forms';
         <div class="form-group">
           <input 
             type="text" 
-            class="form-control"
+            class="form-control chat-textarea pe-5"
             [(ngModel)]="nickname"
             placeholder="Dein Nickname"
             (keydown.enter)="submitNickname()"
           >
         </div>
         <button 
-          class="btn btn-primary" 
+          class="btn btn-success chat-send-button mt-3" 
           [disabled]="!nickname.trim()" 
           (click)="submitNickname()">
           Starten

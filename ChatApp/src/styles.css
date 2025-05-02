@@ -10,3 +10,9 @@
     white-space: pre-wrap;
     overflow-wrap: break-word;
   }
+
+.chat-textarea:focus {
+    outline: none;
+    border-color: #00802F; /* your green */
+    box-shadow: 0 0 0 2px rgba(0, 128, 47, 0.3); /* green glow */
+  }
