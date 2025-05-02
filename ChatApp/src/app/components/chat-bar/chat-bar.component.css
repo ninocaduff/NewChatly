@@ -20,6 +20,15 @@
   box-sizing: border-box;
 }
 
+.char-counter {
+  position: absolute;
+  bottom: 85px;
+  right: 20px;
+  font-size: 12px;
+  color: #6c757d;
+  pointer-events: none;
+}
+
 .chat-textarea:focus {
   outline: none; /* entfernt den blauen Standardrahmen */
   border-color: #00802F; /* grüner Rand */

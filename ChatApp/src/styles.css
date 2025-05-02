@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+.chat-name {
+    color: #00802F !important;
+    font-weight: bold;
+  }
+  
+  .chat-message-content {
+    word-break: break-word;
+    white-space: pre-wrap;
+  }

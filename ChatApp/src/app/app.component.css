@@ -7,7 +7,6 @@ body {
     padding: 0;
 }
 
-
 .wrapper {
     font-family: 'Montserrat', sans-serif;
     display: flex;
@@ -32,8 +31,7 @@ body {
     margin-bottom: 0;
     overflow-y: auto;
   }
-  
-  
+
   .chat-footer {
     display: flex;
     justify-content: center;

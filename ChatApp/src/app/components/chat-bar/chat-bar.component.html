@@ -1,16 +1,22 @@
-<div class="chat-bar">
+<div class="chat-bar position-relative">
   <textarea 
     rows="3"
-    class="form-control chat-textarea"
+    maxlength="500"
+    class="form-control chat-textarea pe-5"
     placeholder="Schreibe eine Nachricht..."
     [(ngModel)]="chatMessage"
     (keydown)="onKeyDown($event)">
   </textarea>
 
+  <!-- Character counter inside textarea -->
+  <div class="char-counter">
+    {{ chatMessage.length }}/500
+  </div>
+
   <button 
-    class="btn btn-primary chat-send-button" 
-    [disabled]="!chatMessage" 
+    class="btn btn-success chat-send-button mt-3" 
+    [disabled]="!chatMessage.trim()" 
     (click)="addMessage(chatMessage)">
-    Senden
+    <strong>Senden</strong>
   </button>
 </div>

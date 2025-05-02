@@ -34,8 +34,8 @@ export class AppComponent implements OnInit {
       // Lade den Chat-Verlauf vom Server
       this.fetchChatHistory();
       
-      // Setze ein Intervall, um den Chat-Verlauf alle 2 Sekunden zu aktualisieren
-      setInterval(() => this.fetchChatHistory(), 1000);
+      // Setze ein Intervall, um den Chat-Verlauf alle 0.5 Sekunden zu aktualisieren
+      setInterval(() => this.fetchChatHistory(), 500);
     }
   }
 
@@ -47,16 +47,16 @@ export class AppComponent implements OnInit {
         messages.forEach(msg => {
           const time = msg.time || '';
           const formattedMsg = `  <div class="container my-2">
-  <div class="d-flex flex-column bg-light p-2 rounded">
-    <div class="d-flex justify-content-between">
-      <small class="text-primary" title="${msg.username}">${msg.username}</small>
-      <small class="text-muted">${time}</small>
-    </div>
-    <div class="mt-1">
-      <span>${msg.message}</span>
-    </div>
-  </div>
-</div>`;
+            <div class="d-flex flex-column bg-light p-2 rounded">
+              <div class="d-flex justify-content-between">
+                <small class="chat-name" title="${msg.username}">${msg.username}</small>
+                <small class="text-muted">${time}</small>
+              </div>
+              <div class="mt-1">
+                <span>${msg.message}</span>
+              </div>
+            </div>
+          </div>`;
           this.fullHistory += formattedMsg;
         });
       },
@@ -110,11 +110,11 @@ export class AppComponent implements OnInit {
     return `  <div class="container my-2">
   <div class="d-flex flex-column bg-light p-2 rounded">
     <div class="d-flex justify-content-between">
-      <small class="text-primary" title="${this.nickname}">${this.nickname}</small>
+      <small class="chat-name" title="${this.nickname}">${this.nickname}</small>
       <small class="text-muted">${time}</small>
     </div>
     <div class="mt-1">
-      <span>${formattedContent}</span>
+      <span class="chat-message-content">${formattedContent}</span>
     </div>
   </div>
 </div>`;

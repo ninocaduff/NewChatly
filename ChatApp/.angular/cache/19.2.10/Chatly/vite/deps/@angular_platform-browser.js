@@ -1,12 +1,12 @@
 import {
+  withHttpTransferCache
+} from "./chunk-V7JBZ437.js";
+import {
   CommonModule,
   DomAdapter,
   getDOM,
   setRootDomAdapter
 } from "./chunk-M3UQ4PLG.js";
-import {
-  withHttpTransferCache
-} from "./chunk-V7JBZ437.js";
 import {
   DOCUMENT,
   PLATFORM_BROWSER_ID,

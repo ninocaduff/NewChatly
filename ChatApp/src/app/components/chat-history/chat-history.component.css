@@ -14,12 +14,6 @@
   box-sizing: border-box;
 }
 
-
-.chat-name {
-  color: #00802F;
-  font-weight: bold;
-}
-
 .message strong {
   color: green !important; /* Erzwingt die grüne Farbe */
   font-weight: bold; /* Beibehaltung der Fettschrift */
