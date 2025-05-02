@@ -32,10 +32,7 @@ export class AppComponent implements OnInit {
     
     if (this.nickname) {
       // Lade den Chat-Verlauf vom Server
-      this.fetchChatHistory();
-      
-      // Setze ein Intervall, um den Chat-Verlauf alle 0.5 Sekunden zu aktualisieren
-      setInterval(() => this.fetchChatHistory(), 500);
+      this.startPolling(); // 
     }
   }
 
@@ -58,7 +55,7 @@ export class AppComponent implements OnInit {
                 <small class="text-muted">${time}</small>
               </div>
               <div class="mt-1">
-                <span>${msg.message}</span>
+                <span class="chat-message-content">${msg.message}</span>
               </div>
             </div>
           </div>`;
@@ -97,6 +94,14 @@ export class AppComponent implements OnInit {
     });
   }
 
+
+  private pollingInterval: any;
+
+  private startPolling(): void {
+  this.fetchChatHistory();
+  this.pollingInterval = setInterval(() => this.fetchChatHistory(), 500);
+  }
+
   /**
    * Formatiert die Nachricht mit dem Nickname (für lokale Anzeige)
    */
@@ -130,7 +135,8 @@ export class AppComponent implements OnInit {
     this.userProfileService.saveNickname(nickname);
     this.showNicknameDialog = false;
     
-    // Lade den Chat-Verlauf nach dem Login
-    this.fetchChatHistory();
+    // Lade den Chat-Verlauf konstant
+    this.startPolling();
   }
+
 }

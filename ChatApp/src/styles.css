@@ -5,7 +5,8 @@
     font-weight: bold;
   }
   
-  .chat-message-content {
+.chat-message-content {
     word-break: break-word;
     white-space: pre-wrap;
+    overflow-wrap: break-word;
   }
