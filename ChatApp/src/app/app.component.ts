@@ -38,12 +38,12 @@ export class AppComponent implements OnInit {
 
   // Neue Methode zum Abrufen des Chat-Verlaufs
   fetchChatHistory(): void {
-    this.http.get<any[]>('https://5e00-84-20-56-177.ngrok-free.app/api/messages').subscribe({
+    this.http.get<any[]>('https://newchatly-backend.onrender.com/api/messages').subscribe({
       next: (messages) => {
         this.fullHistory = '';
         messages.forEach(msg => {
           const time = msg.time
-            ? new Date('1970-01-01T' + msg.time).toLocaleTimeString('de', {
+            ? new Date(msg.time).toLocaleTimeString('de', {
                 hour: '2-digit',
                 minute: '2-digit'
               })
@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
     const messageText = timeMatch[2];
     
     // Sende die Nachricht an die API
-    this.http.post('https://5e00-84-20-56-177.ngrok-free.app/api/messages', {
+    this.http.post('https://newchatly-backend.onrender.com/api/messages', {
       username: this.nickname,
       message: messageText
     }).subscribe({

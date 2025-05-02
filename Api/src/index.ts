@@ -6,7 +6,7 @@ import path from 'path'; // ✅ Import path
 interface Message {
   username: string;
   message: string;
-  timestamp: Date;
+  timestamp: string;
 }
 
 // In-Memory-Speicher für Chat-Nachrichten
@@ -28,7 +28,7 @@ app.post('/api/messages', (req: Request, res: Response) => {
   const newMessage: Message = {
     username,
     message,
-    timestamp: new Date()
+    timestamp: new Date().toISOString()
   };
   
   chatHistory.push(newMessage);
@@ -42,10 +42,16 @@ app.get('/api/messages', (req: Request, res: Response) => {
   const formattedChatHistory = chatHistory.map(msg => ({
     username: msg.username,
     message: msg.message,
-    time: msg.timestamp.toLocaleTimeString()
+    time: msg.timestamp
   }));
   
   return res.status(200).json(formattedChatHistory);
+});
+
+// DELETE-Endpunkt zum Löschen des gesamten Chatverlaufs
+app.delete('/api/messages', (req: Request, res: Response) => {
+  chatHistory.length = 0; // Clear the array
+  return res.status(200).json({ message: 'Chatverlauf wurde gelöscht.' });
 });
 
 // Serve static Angular files from dist
