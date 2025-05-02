@@ -45,7 +45,12 @@ export class AppComponent implements OnInit {
       next: (messages) => {
         this.fullHistory = '';
         messages.forEach(msg => {
-          const time = msg.time || '';
+          const time = msg.time
+            ? new Date('1970-01-01T' + msg.time).toLocaleTimeString('de', {
+                hour: '2-digit',
+                minute: '2-digit'
+              })
+            : '';
           const formattedMsg = `  <div class="container my-2">
             <div class="d-flex flex-column bg-light p-2 rounded">
               <div class="d-flex justify-content-between">
