@@ -33,7 +33,7 @@
     "@angular/compiler-cli": "^19.2.9",
     "@angular/localize": "^19.2.9",
     "@axe-core/playwright": "^4.10.1",
-    "@playwright/test": "^1.51.1",
+    "@playwright/test": "^1.52.0",
     "@types/jasmine": "~5.1.0",
     "angular-cli-ghpages": "^2.0.3",
     "axe-core": "^4.10.3",

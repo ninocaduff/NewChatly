@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Header, Footer, und Content vorhanden', async ({ page }) => {
-  await page.goto('http://localhost:4200');
+  await page.goto('https://chatlyhsg.onrender.com/');
 
   await expect(page.locator('header')).toBeVisible();
   await expect(page.locator('.footer')).toBeVisible();
@@ -20,7 +20,7 @@ function rgbToHex(rgb: string): string {
 }
 
 test('Footer hat Farbe grün (#00802f)', async ({ page }) => {
-  await page.goto('http://localhost:4200');
+  await page.goto('https://chatlyhsg.onrender.com/');
 
   const footer = await page.locator('.footer');
 
@@ -33,7 +33,7 @@ test('Footer hat Farbe grün (#00802f)', async ({ page }) => {
 });
 
 /*test('Page is in German by default', async ({ page }) => {
-    await page.goto('http://localhost:4200');
+    await page.goto('https://chatlyhsg.onrender.com/');
   
     const lang = await page.evaluate(() => document.documentElement.lang);
     expect(lang).toBe('de');
@@ -50,7 +50,7 @@ test.describe('Responsives Design', () => {
     for (const vp of viewports) {
       test(`lädt korrekt auf ${vp.name}`, async ({ page }) => {
         await page.setViewportSize({ width: vp.width, height: vp.height });
-        await page.goto('http://localhost:4200');
+        await page.goto('https://chatlyhsg.onrender.com/');
   
         await expect(page.locator('header')).toBeVisible();
         await expect(page.locator('.footer')).toBeVisible();
@@ -60,7 +60,7 @@ test.describe('Responsives Design', () => {
 
   test('Website lädt in unter 2 Sekunden', async ({ page }) => {
     const start = Date.now();
-    await page.goto('http://localhost:4200', { waitUntil: 'load' });
+    await page.goto('https://chatlyhsg.onrender.com/', { waitUntil: 'load' });
     const duration = Date.now() - start;
     expect(duration).toBeLessThan(2000);
   });
