@@ -1,1 +1,9 @@
-<div #scrollContainer class="form-control" [innerHTML]="history"></div>
+<div 
+  #scrollContainer 
+  class="form-control" 
+  [innerHTML]="history" 
+  role="log" 
+  aria-live="polite" 
+  aria-atomic="false" 
+  aria-label="Nachrichtenverlauf">
+</div>
