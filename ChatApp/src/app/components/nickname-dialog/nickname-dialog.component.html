@@ -13,18 +13,26 @@
 
     <form (ngSubmit)="submitNickname()" aria-label="Nickname Formular">
       <label for="nicknameInput" class="visually-hidden">Dein Nickname</label>
-      <input 
-        id="nicknameInput"
-        name="nickname"
-        type="text" 
-        class="form-control chat-textarea pe-5"
-        [(ngModel)]="nickname"
-        placeholder="Dein Nickname"
-        (keydown.enter)="submitNickname()"
-        aria-label="Nickname eingeben"
-        required
-        aria-required="true"
-      >
+      <div class="input-wrapper position-relative">
+        <input 
+          id="nicknameInput"
+          name="nickname"
+          type="text" 
+          class="form-control chat-textarea pe-5"
+          [(ngModel)]="nickname"
+          placeholder="Dein Nickname"
+          (keydown.enter)="submitNickname()"
+          aria-label="Nickname eingeben"
+          required
+          aria-required="true"
+          maxlength="30"
+        >
+      
+        <!-- ✅ Zeichenanzahl erscheint rechts im Eingabefeld -->
+        <span class="char-counter-name">
+          {{ nickname?.length || 0 }}/30
+        </span>
+      </div>
 
       <button 
         type="submit"

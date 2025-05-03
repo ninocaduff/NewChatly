@@ -13,10 +13,10 @@
   
   .nickname-dialog {
     background: white;
-    padding: 20px;
+    padding: 40px;
     border-radius: 8px;
     width: 90%;
-    max-width: 400px;
+    max-width: 500px;
     text-align: center;
   }
   
@@ -34,5 +34,26 @@
     clip: rect(0, 0, 0, 0) !important;
     white-space: nowrap !important;
     border: 0 !important;
+  }
+  
+  .input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  .form-control.chat-textarea {
+    padding-right: 60px; /* enough space for counter */
+  }
+  
+  .char-counter-name {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #6c757d;
+    background-color: white;
+    pointer-events: none;
+    white-space: nowrap;
   }
   

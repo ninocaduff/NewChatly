@@ -11,12 +11,15 @@ export class ChatHistoryComponent implements AfterViewChecked {
 
   @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
 
+  private previousScrollHeight = 0;
+
   ngAfterViewChecked(): void {
     const el = this.scrollContainer.nativeElement;
-    const isNearBottom = el.scrollHeight - el.scrollTop <= el.clientHeight + 50;
+    const currentScrollHeight = el.scrollHeight;
   
-    if (isNearBottom) {
+    if (currentScrollHeight > this.previousScrollHeight) {
       this.scrollToBottom();
+      this.previousScrollHeight = currentScrollHeight;
     }
   }
 

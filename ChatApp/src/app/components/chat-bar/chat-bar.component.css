@@ -20,7 +20,7 @@
   box-sizing: border-box;
 }
 
-.char-counter {
+.char-counter-text {
   position: absolute;
   bottom: 85px;
   right: 20px;
