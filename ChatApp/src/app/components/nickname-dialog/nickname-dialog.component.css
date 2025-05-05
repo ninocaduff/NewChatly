@@ -57,22 +57,3 @@
     white-space: nowrap;
   }
   
-  .chat-send-button {
-    width: 100%;
-    max-width: 200px;
-    background-color: #00802F;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    transition: background-color 0.2s;
-  }
-  
-  .chat-send-button:hover {
-    background-color: #006622;
-  }
-  
-  .chat-send-button:active {
-    background-color: #00802F;
-  }
