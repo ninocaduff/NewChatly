@@ -48,17 +48,18 @@ export class AppComponent implements OnInit {
                 minute: '2-digit'
               })
             : '';
-          const formattedMsg = `  <div class="container my-2">
-            <div class="d-flex flex-column bg-light p-2 rounded">
-              <div class="d-flex justify-content-between">
-                <small class="chat-name" title="${msg.username}">${msg.username}</small>
-                <small class="text-muted">${time}</small>
+            const formattedMsg = `
+            <article class="container my-2" role="group" aria-label="${msg.message} von ${msg.username} um ${time}">
+              <div class="d-flex flex-column bg-light p-2 rounded">
+                <div class="d-flex justify-content-between">
+                  <small class="chat-name" title="${msg.username}">${msg.username}</small>
+                  <small class="text-muted">${time}</small>
+                </div>
+                <div class="mt-1">
+                  <span class="chat-message-content">${msg.message}</span>
+                </div>
               </div>
-              <div class="mt-1">
-                <span class="chat-message-content">${msg.message}</span>
-              </div>
-            </div>
-          </div>`;
+            </article>`;
           this.fullHistory += formattedMsg;
         });
       },
