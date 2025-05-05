@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class ChatBarComponent {
   @Output() submitMessage = new EventEmitter<string>();
+
+  @ViewChild('chatInput') chatInputRef!: ElementRef;
   
   chatMessage = '';
   warningMessage = '';
@@ -32,7 +34,11 @@ export class ChatBarComponent {
     const messageToSend = `<b>${time}</b> - ${trimmed}<br>`;
     this.submitMessage.emit(messageToSend);
     this.chatMessage = ''; // Leere das Textfeld nach dem Senden
+
+    this.focusInput(); // ✅ Set focus again
   }
+
+  
 
   onKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Enter' && !event.shiftKey) {
@@ -43,5 +49,13 @@ export class ChatBarComponent {
 
       this.addMessage(trimmed);
     }
+  }
+
+  focusInput(): void {
+    setTimeout(() => {
+      if (this.chatInputRef) {
+        this.chatInputRef.nativeElement.focus();
+      }
+    }); 
   }
 }
