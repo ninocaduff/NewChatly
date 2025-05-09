@@ -54,3 +54,22 @@
 .chat-send-button:active {
   background-color: #00802F;
 }
+
+[data-bs-theme="dark"] .chat-bar {
+  background-color: #1e1e1e;
+}
+
+[data-bs-theme="dark"] .chat-textarea {
+  background-color: #2a2a2a;
+  color: #f1f1f1;
+  border-color: #555;
+}
+
+[data-bs-theme="dark"] .chat-send-button {
+  background-color: #444;
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .chat-send-button:hover {
+  background-color: #666;
+}

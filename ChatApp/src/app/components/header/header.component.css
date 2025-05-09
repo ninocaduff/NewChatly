@@ -31,3 +31,13 @@
     background-color: #ccc;
     margin: 0 10px;
 }
+
+[data-bs-theme="dark"] .header {
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+  }
+  
+  [data-bs-theme="dark"] .divider {
+    background-color: #444;
+  }
+  

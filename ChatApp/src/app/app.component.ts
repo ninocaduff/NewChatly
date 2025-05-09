@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-root',
   imports: [HeaderComponent, FooterComponent, ChatBarComponent, ChatHistoryComponent, NicknameDialogComponent, NgIf],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   title = 'Chatly';
@@ -25,14 +25,24 @@ export class AppComponent implements OnInit {
     private http: HttpClient
   ) {}
 
-  ngOnInit() {
-    // Versuche, den gespeicherten Nickname zu laden
+  toggleTheme(): void {
+    const current = document.documentElement.getAttribute('data-bs-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-bs-theme', next);
+    localStorage.setItem('theme', next);
+  }
+  
+  ngOnInit(): void {
+    // 🌙 Theme-Zustand laden
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-bs-theme', savedTheme);
+  
+    // 👤 Nickname prüfen
     this.nickname = this.userProfileService.getNickname();
     this.showNicknameDialog = !this.nickname;
-    
+  
     if (this.nickname) {
-      // Lade den Chat-Verlauf vom Server
-      this.startPolling(); // 
+      this.startPolling();
     }
   }
 

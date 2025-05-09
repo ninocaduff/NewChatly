@@ -1,4 +1,13 @@
 <app-header></app-header>
+
+<button 
+  class="btn btn-outline-secondary position-fixed top-0 end-0 m-3 z-3"
+  (click)="toggleTheme()"
+  aria-label="Darstellung wechseln (Hell/Dunkel)">
+  🌓 Theme
+</button>
+
+
 <div class="wrapper">
   <main role="main" aria-label="Chat-Anwendung">
     <h1 class="visually-hidden">{{ title }}</h1>

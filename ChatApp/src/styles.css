@@ -33,3 +33,46 @@ html, body {
     border: 0 !important;
   }
 
+/* Dark Mode Global Styles */
+[data-bs-theme="dark"] {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .chat-textarea {
+  background-color: #1f1f1f;
+  color: #f1f1f1;
+  border-color: #444;
+}
+
+[data-bs-theme="dark"] .chat-send-button {
+  background-color: #333;
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .chat-send-button:hover {
+  background-color: #555;
+}
+
+/* Header/Footer */
+[data-bs-theme="dark"] .header {
+  background-color: #1a1a1a;
+  color: #f1f1f1;
+}
+
+[data-bs-theme="dark"] .footer {
+  background-color: #1a1a1a;
+  color: #f1f1f1;
+}
+
+/* Nickname Dialog */
+[data-bs-theme="dark"] .nickname-dialog {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+}
+
+[data-bs-theme="dark"] .char-counter-name {
+  background-color: #1e1e1e;
+  color: #bbb;
+}

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // für [(ngModel)]
 
 @Component({
@@ -6,7 +6,8 @@ import { FormsModule } from '@angular/forms'; // für [(ngModel)]
   standalone: true,
   imports: [FormsModule],
   templateUrl: './nickname-dialog.component.html',
-  styleUrls: ['./nickname-dialog.component.css']
+  styleUrls: ['./nickname-dialog.component.css'],
+  encapsulation: ViewEncapsulation.None // <–– hinzugefügt
 })
 export class NicknameDialogComponent {
   @Output() nicknameSubmitted = new EventEmitter<string>();
@@ -18,4 +19,3 @@ export class NicknameDialogComponent {
     }
   }
 }
-

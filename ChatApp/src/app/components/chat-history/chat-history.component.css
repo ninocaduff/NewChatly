@@ -18,3 +18,13 @@
   color: green !important; /* Erzwingt die grüne Farbe */
   font-weight: bold; /* Beibehaltung der Fettschrift */
 }
+
+[data-bs-theme="dark"] .form-control {
+  background-color: #1e1e1e;
+  color: #000000;
+  border-color: #444;
+}
+
+[data-bs-theme="dark"] .message strong {
+  color: #6fcf97 !important; /* sanftes Grün */
+}

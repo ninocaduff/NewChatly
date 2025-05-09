@@ -76,3 +76,33 @@
   .chat-send-button:active {
     background-color: #00802F;
   }
+
+  [data-bs-theme="dark"] .nickname-dialog {
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+  }
+  
+  [data-bs-theme="dark"] .char-counter-name {
+    background-color: #1e1e1e;
+    color: #bbb;
+  }
+  
+  [data-bs-theme="dark"] .chat-send-button {
+    background-color: #444;
+    color: #fff;
+  }
+  
+  [data-bs-theme="dark"] .chat-send-button:hover {
+    background-color: #666;
+  }
+  
+  /* Begrenzung für das Eingabefeld */
+.nickname-dialog input.form-control {
+  width: 100%;
+  max-width: 400px;
+  height: 44px;
+  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  box-sizing: border-box;
+}

@@ -1,10 +1,11 @@
-import { AfterViewChecked, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-chat-history',
   imports: [],
   templateUrl: './chat-history.component.html',
-  styleUrl: './chat-history.component.css'
+  styleUrls: ['./chat-history.component.css'],
+  encapsulation: ViewEncapsulation.None // <– hinzugefügt
 })
 export class ChatHistoryComponent implements AfterViewChecked {
   @Input() history: string = '';
