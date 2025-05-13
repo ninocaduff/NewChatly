@@ -1,61 +1,62 @@
-import { Component, EventEmitter, Output, Input, ViewChild, ElementRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common"; // für *ngIf
 
 @Component({
-  selector: 'app-chat-bar',
-  imports: [FormsModule],
-  templateUrl: './chat-bar.component.html',
-  styleUrl: './chat-bar.component.css'
+  selector: "app-chat-bar",
+  standalone: true,
+  imports: [FormsModule, CommonModule],
+  templateUrl: "./chat-bar.component.html",
+  styleUrls: ["./chat-bar.component.css"],
 })
-export class ChatBarComponent {
+export class ChatBarComponent implements AfterViewInit {
   @Output() submitMessage = new EventEmitter<string>();
+  @ViewChild("chatInput") chatInput!: ElementRef<HTMLTextAreaElement>;
 
-  @ViewChild('chatInput') chatInputRef!: ElementRef;
-  
-  chatMessage = '';
-  warningMessage = '';
+  chatMessage: string = "";
+  warningMessage: string = "";
+
+  constructor() {}
+
+  ngAfterViewInit(): void {
+    this.focusInput();
+  }
+
+  focusInput(): void {
+    if (this.chatInput && this.chatInput.nativeElement) {
+      this.chatInput.nativeElement.focus();
+    }
+  }
+
+  onInput(): void {
+    if (this.chatMessage.length > 500) {
+      this.warningMessage = "Die Nachricht darf maximal 500 Zeichen lang sein.";
+    } else {
+      this.warningMessage = "";
+    }
+  }
 
   addMessage(message: string): void {
     const trimmed = message.trim();
     if (trimmed.length === 0) return;
 
     if (trimmed.length > 500) {
-      this.warningMessage = 'Die Nachricht darf maximal 500 Zeichen lang sein.';
+      this.warningMessage = "Die Nachricht darf maximal 500 Zeichen lang sein.";
       return;
     }
-    this.warningMessage = ''; // clear it if successful
+    this.warningMessage = "";
 
-    const now = new Date();
-    const time = now.toLocaleTimeString('de', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-
-    const messageToSend = `<b>${time}</b> - ${trimmed}<br>`;
-    this.submitMessage.emit(messageToSend);
-    this.chatMessage = ''; // Leere das Textfeld nach dem Senden
-
-    this.focusInput(); // ✅ Set focus again
+    this.submitMessage.emit(trimmed); 
+    this.chatMessage = "";
+    this.focusInput();
   }
-
-  
 
   onKeyDown(event: KeyboardEvent): void {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault(); // Verhindere Zeilenumbruch
-
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
       const trimmed = this.chatMessage.trim();
       if (trimmed.length === 0) return;
-
       this.addMessage(trimmed);
     }
-  }
-
-  focusInput(): void {
-    setTimeout(() => {
-      if (this.chatInputRef) {
-        this.chatInputRef.nativeElement.focus();
-      }
-    }); 
   }
 }

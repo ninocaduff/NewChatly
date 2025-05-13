@@ -1,0 +1,11 @@
+<article class="message-entry" role="group" [attr.aria-label]="msg.ariaLabel || ('Nachricht von ' + msg.username)">
+  <div class="message-bubble">
+    <div class="message-meta">
+      <small class="message-username" [title]="msg.username">{{ msg.username }}</small>
+      <small class="message-timestamp" [attr.aria-label]="'Gesendet um ' + msg.time">{{ msg.time }}</small>
+    </div>
+    <div class="message-content-wrapper">
+      <p class="message-text">{{ msg.message }}</p>
+    </div>
+  </div>
+</article>

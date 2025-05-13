@@ -1,49 +1,27 @@
-body {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    color: #333;
-    margin: 0;
-    padding: 0;
+.app-container { 
+  flex-grow: 1; 
+  display: flex; 
+  flex-direction: column; 
 }
 
-.wrapper {
-    font-family: 'Montserrat', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
+.chat-main {
+  padding-top: 20px; 
+  padding-bottom: 20px; 
+  width: 100%; 
 }
 
-.chat-page {
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* full viewport height */
-    justify-content: flex-end; /* pushes content to the bottom */
-    padding: 20px 0;
-  }
-  
-  .chat-content {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    margin-top: clamp(80px, 25vh, 300px);
-    margin-bottom: 0;
-    overflow-y: auto;
-  }
-
-  .chat-footer {
-    display: flex;
-    justify-content: center;
-  }
-  
-.message-container {
-  text-align: left !important;
-
+.spacer-between {
+height: 15px; /* Reduced spacer */
 }
 
-.message-nickname {
-  color: grey;
-    font-weight: bold;
-    font-size: 12px;
+.visually-hidden {
+position: absolute;
+width: 1px;
+height: 1px;
+padding: 0;
+margin: -1px;
+overflow: hidden;
+clip: rect(0, 0, 0, 0);
+white-space: nowrap;
+border: 0;
 }

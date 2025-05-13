@@ -1,19 +1,13 @@
 <app-header></app-header>
-<div class="wrapper">
-  <main role="main" aria-label="Chat-Anwendung">
+
+<div class="container-fluid app-container">
+  <main role="main" aria-label="Chat-Anwendung Hauptbereich" class="chat-main col-12 col-md-10 col-lg-10">
     <h1 class="visually-hidden">{{ title }}</h1>
-    <div class="chat-page">
-      <div class="chat-content">
-        <app-chat-history [history]="fullHistory"></app-chat-history>
-      </div>
-    
-      <div class="chat-footer">
-        <app-chat-bar (submitMessage)="messageSubmitted($event)"></app-chat-bar>
-      </div>
-    </div>
+    <app-chat-history [messages]="messages"></app-chat-history>
+    <div class="spacer-between"></div>
+    <app-chat-bar (submitMessage)="messageSubmitted($event)"></app-chat-bar>
   </main>
 </div>
+
 <app-nickname-dialog *ngIf="showNicknameDialog" (nicknameSubmitted)="setNickname($event)"></app-nickname-dialog>
 <app-footer></app-footer>
-
-
