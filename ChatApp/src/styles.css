@@ -1,44 +1,70 @@
-/* You can add global styles to this file, and also import other style files */
-
+/* === Base === */
 html, body {
   font-family: 'Montserrat', sans-serif;
+  background-color: #ffffff; /* Light Mode Hintergrund */
+  min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
+/* === Text & Chat Styling === */
 .chat-name {
-    color: #00802F !important;
-    font-weight: bold;
-  }
-  
+  color: #00802F !important;
+  font-weight: bold;
+}
+
 .chat-message-content {
-    word-break: break-word;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-  }
+  word-break: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
 
 .chat-textarea:focus {
-    outline: none;
-    border-color: #00802F; /* your green */
-    box-shadow: 0 0 0 2px rgba(0, 128, 47, 0.3); /* green glow */
-  }
+  outline: none;
+  border-color: #00802F;
+  box-shadow: 0 0 0 2px rgba(0, 128, 47, 0.3);
+}
 
-  .visually-hidden {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    margin: -1px !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important;
-    white-space: nowrap !important;
-    border: 0 !important;
-  }
+/* === Accessibility === */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
 
-/* Dark Mode Global Styles */
-[data-bs-theme="dark"] {
-  background-color: #121212;
+/* === Dark Mode Global === */
+[data-bs-theme="dark"] html,
+[data-bs-theme="dark"] body,
+[data-bs-theme="dark"] app-root,
+[data-bs-theme="dark"] .container-fluid {
+  background-color: #1a1a1a !important;
+  height: 100%;
+  min-height: 100vh;
+}
+
+/* Zusätzlich: Vollflächiger Fallback über alles */
+[data-bs-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: #1a1a1a;
+  z-index: -1;
+}
+
+/* === Layout-Styling im Dark Mode === */
+[data-bs-theme="dark"] main {
+  background-color: transparent;
   color: #f1f1f1;
 }
 
+/* === Form Elemente im Dark Mode === */
 [data-bs-theme="dark"] .form-control,
 [data-bs-theme="dark"] .chat-textarea {
   background-color: #1f1f1f;
@@ -55,18 +81,18 @@ html, body {
   background-color: #555;
 }
 
-/* Header/Footer */
+/* === Header/Footer im Dark Mode === */
 [data-bs-theme="dark"] .header {
   background-color: #1a1a1a;
   color: #f1f1f1;
 }
 
 [data-bs-theme="dark"] .footer {
-  background-color: #1a1a1a;
-  color: #f1f1f1;
+  background-color: #00802F !important;
+  color: #ffffff;
 }
 
-/* Nickname Dialog */
+/* === Nickname Dialog im Dark Mode === */
 [data-bs-theme="dark"] .nickname-dialog {
   background-color: #1e1e1e;
   color: #f1f1f1;
@@ -75,4 +101,9 @@ html, body {
 [data-bs-theme="dark"] .char-counter-name {
   background-color: #1e1e1e;
   color: #bbb;
+}
+
+/* === Textfarbe für Uhrzeit etc. === */
+[data-bs-theme="dark"] .text-muted {
+  color: #888 !important;
 }

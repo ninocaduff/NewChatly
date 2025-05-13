@@ -1,11 +1,11 @@
 .chat-bar {
-  width: 50vw; /* 70 % der Bildschirmbreite */
+  width: 100%;
+  padding: 16px 24px;
+  max-width: 900px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 12px;
-  padding: 10px;
   box-sizing: border-box;
 }
 
@@ -22,17 +22,17 @@
 
 .char-counter-text {
   position: absolute;
-  bottom: 85px;
-  right: 20px;
+  bottom: 90px;
+  right: 30px;
   font-size: 12px;
   color: #6c757d;
   pointer-events: none;
 }
 
 .chat-textarea:focus {
-  outline: none; /* entfernt den blauen Standardrahmen */
-  border-color: #00802F; /* grüner Rand */
-  box-shadow: 0 0 0 2px rgba(0, 128, 47, 0.3); /* optional grüner Schein */
+  outline: none;
+  border-color: #00802F;
+  box-shadow: 0 0 0 2px rgba(0, 128, 47, 0.3);
 }
 
 .chat-send-button {
@@ -45,6 +45,7 @@
   font-weight: bold;
   padding: 10px;
   transition: background-color 0.2s;
+  align-self: center;
 }
 
 .chat-send-button:hover {
@@ -72,4 +73,8 @@
 
 [data-bs-theme="dark"] .chat-send-button:hover {
   background-color: #666;
+}
+
+[data-bs-theme="dark"] .chat-bar {
+  background-color: #1e1e1e;
 }

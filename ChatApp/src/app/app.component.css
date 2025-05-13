@@ -1,49 +1,54 @@
-body {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    color: #333;
-    margin: 0;
-    padding: 0;
+/* Reset & Basiseinstellungen */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #ffffff; /* Light Mode Hintergrund */
 }
 
-.wrapper {
-    font-family: 'Montserrat', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
+/* Container auf volle Höhe */
+.container-fluid {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  background-color: #ffffff;
 }
 
-.chat-page {
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* full viewport height */
-    justify-content: flex-end; /* pushes content to the bottom */
-    padding: 20px 0;
-  }
-  
-  .chat-content {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    margin-top: clamp(80px, 25vh, 300px);
-    margin-bottom: 0;
-    overflow-y: auto;
-  }
+/* Layoutbereich */
+main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+  background-color: transparent;
+}
 
-  .chat-footer {
-    display: flex;
-    justify-content: center;
-  }
-  
+/* Nachrichten-Layout */
 .message-container {
   text-align: left !important;
-
 }
 
 .message-nickname {
   color: grey;
-    font-weight: bold;
-    font-size: 12px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+/* Host-Setup */
+:host {
+  display: block;
+  height: 100%;
+}
+
+/* Dark Mode fix */
+[data-bs-theme="dark"] html,
+[data-bs-theme="dark"] body,
+[data-bs-theme="dark"] app-root,
+[data-bs-theme="dark"] .container-fluid {
+  background-color: #1a1a1a !important;
 }

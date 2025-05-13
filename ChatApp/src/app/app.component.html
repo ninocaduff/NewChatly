@@ -1,28 +1,33 @@
 <app-header></app-header>
 
+<!-- Fixierter Button oben rechts -->
 <button 
   class="btn btn-outline-secondary position-fixed top-0 end-0 m-3 z-3"
   (click)="toggleTheme()"
   aria-label="Darstellung wechseln (Hell/Dunkel)">
-  🌓 Theme
+  🌓
 </button>
 
+<!-- Bootstrap Layout -->
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <main role="main" aria-label="Chat-Anwendung" class="col-12 col-md-10 col-lg-8 d-flex flex-column min-vh-100">
 
-<div class="wrapper">
-  <main role="main" aria-label="Chat-Anwendung">
-    <h1 class="visually-hidden">{{ title }}</h1>
-    <div class="chat-page">
-      <div class="chat-content">
+      <h1 class="visually-hidden">{{ title }}</h1>
+
+      <!-- Chatverlauf (flexibel) -->
+      <div class="flex-grow-1 overflow-auto">
         <app-chat-history [history]="fullHistory"></app-chat-history>
       </div>
-    
-      <div class="chat-footer">
+
+      <!-- Chatbar direkt darunter -->
+      <div class="pb-3">
         <app-chat-bar (submitMessage)="messageSubmitted($event)"></app-chat-bar>
       </div>
-    </div>
-  </main>
+
+    </main>
+  </div>
 </div>
+
 <app-nickname-dialog *ngIf="showNicknameDialog" (nicknameSubmitted)="setNickname($event)"></app-nickname-dialog>
 <app-footer></app-footer>
-
-
