@@ -55,9 +55,12 @@ export class AppComponent implements OnInit {
             .map((msg) => {
               const messageDate = new Date(msg.time);
               const timeStr = msg.time
-                ? messageDate.toLocaleTimeString("de", {
+                ? messageDate.toLocaleString("de", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
                     hour: "2-digit",
-                    minute: "2-digit",
+                    minute: "2-digit"
                   })
                 : "";
               const ariaMessage = String(msg.message).replace(/<[^>]*>/g, "");
@@ -67,7 +70,7 @@ export class AppComponent implements OnInit {
                 message: msg.message,
                 time: timeStr,
                 rawDate: messageDate,
-                ariaLabel: `Nachricht von ${msg.username}: ${ariaMessage}, gesendet um ${timeStr}`,
+                ariaLabel: `Nachricht von ${msg.username}: ${ariaMessage}, gesendet am ${timeStr}`,
               } as ChatMessage;
             })
             .sort(
@@ -81,6 +84,7 @@ export class AppComponent implements OnInit {
         },
       });
   }
+  
 
   messageSubmitted(messageText: string): void {
     if (!messageText.trim()) return;
