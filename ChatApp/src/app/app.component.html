@@ -11,20 +11,24 @@
 <!-- Bootstrap Layout -->
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <main role="main" aria-label="Chat-Anwendung" class="col-12 col-md-10 col-lg-8 d-flex flex-column min-vh-100">
+    <main role="main" aria-label="Chat-Anwendung" class="chat-main col-12 col-md-10 col-lg-8">
 
       <h1 class="visually-hidden">{{ title }}</h1>
 
-      <!-- Chatverlauf (flexibel) -->
-      <div class="flex-grow-1 overflow-auto">
-        <app-chat-history [history]="fullHistory"></app-chat-history>
-      </div>
+      <!-- Abstand Header → Chatverlauf -->
+      <div class="spacer-top"></div>
 
-      <!-- Chatbar direkt darunter -->
-      <div class="pb-3">
-        <app-chat-bar (submitMessage)="messageSubmitted($event)"></app-chat-bar>
-      </div>
+      <!-- Chatverlauf -->
+      <app-chat-history [history]="fullHistory"></app-chat-history>
 
+      <!-- Abstand Chatverlauf → Chat-Bar -->
+      <div class="spacer-between"></div>
+
+      <!-- Chatbar -->
+      <app-chat-bar (submitMessage)="messageSubmitted($event)"></app-chat-bar>
+
+      <!-- Abstand zum Footer -->
+      <div class="spacer-footer"></div>
     </main>
   </div>
 </div>

@@ -7,10 +7,10 @@ body, html {
   font-size: 16px;
   line-height: 1.6;
   color: #333;
-  background-color: #ffffff; /* Light Mode Hintergrund */
+  background-color: #ffffff;
 }
 
-/* Container auf volle Höhe */
+/* Container */
 .container-fluid {
   padding: 0;
   margin: 0;
@@ -18,14 +18,16 @@ body, html {
   background-color: #ffffff;
 }
 
-/* Layoutbereich */
-main {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding-bottom: 50px;
-  box-sizing: border-box;
-  background-color: transparent;
+/* Main-Layout */
+.chat-main {
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Abstände Header → ChatHistory → ChatBar */
+.spacer-top,
+.spacer-between {
+  height: 50px;
 }
 
 /* Nachrichten-Layout */
@@ -45,10 +47,14 @@ main {
   height: 100%;
 }
 
-/* Dark Mode fix */
+/* Dark Mode */
 [data-bs-theme="dark"] html,
 [data-bs-theme="dark"] body,
 [data-bs-theme="dark"] app-root,
 [data-bs-theme="dark"] .container-fluid {
   background-color: #1a1a1a !important;
+}
+
+.spacer-footer {
+  height: 50px;
 }
