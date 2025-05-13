@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { CommonModule } from "@angular/common"; 
+import { CommonModule } from "@angular/common";
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { ChatBarComponent } from "./components/chat-bar/chat-bar.component";
 import { ChatHistoryComponent } from "./components/chat-history/chat-history.component";
 import { NicknameDialogComponent } from "./components/nickname-dialog/nickname-dialog.component";
-import { ChatMessage } from "./components/chat-message/chat-message.component"; 
+import { ChatMessage } from "./components/chat-message/chat-message.component";
 import { UserProfileService } from "./services/user-profile.service";
 
 @Component({
   selector: "app-root",
-  standalone: true, 
+  standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
     HeaderComponent,
     FooterComponent,
     ChatBarComponent,
@@ -22,7 +22,8 @@ import { UserProfileService } from "./services/user-profile.service";
   ],
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
-}) 
+  encapsulation: ViewEncapsulation.None // <== hinzugefügt
+})
 export class AppComponent implements OnInit {
   title = "Chatly";
   messages: ChatMessage[] = [];
@@ -33,7 +34,7 @@ export class AppComponent implements OnInit {
   constructor(
     private userProfileService: UserProfileService,
     private http: HttpClient
-  )  {}
+  ) {}
 
   ngOnInit(): void {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -47,7 +48,7 @@ export class AppComponent implements OnInit {
 
   fetchChatHistory(): void {
     this.http
-      .get<any[]>("https://chatlyhsg.onrender.com/api/messages") 
+      .get<any[]>("https://chatlyhsg.onrender.com/api/messages")
       .subscribe({
         next: (apiMessages) => {
           this.messages = apiMessages
@@ -87,7 +88,7 @@ export class AppComponent implements OnInit {
       .post("https://chatlyhsg.onrender.com/api/messages", {
         username: this.nickname,
         message: messageText,
-      }) 
+      })
       .subscribe({
         next: () => {
           this.fetchChatHistory();

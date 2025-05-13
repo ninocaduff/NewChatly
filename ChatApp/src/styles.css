@@ -1,67 +1,45 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap") ;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
 
+/* === Basis Layout === */
 html {
   height: 100%;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: inherit;
 }
 
+/* === Normales Light Mode Styling === */
 body {
   margin: 0;
-  padding: 0; 
-  min-height: 100%; 
+  padding: 0;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  font-family: "Montserrat", sans-serif;
+  font-family: inherit;
   line-height: 1.6;
-  background-color: #e9ecef; 
-  color: #212529; 
-  padding-top: 70px; 
+  background-color: #e9ecef;
+  color: #212529;
+  padding-top: 70px; /* Für fixierten Header */
 }
 
 app-root {
   display: flex;
   flex-direction: column;
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
-[data-bs-theme="dark"] body {
-  background-color: #0c0d0e; 
-  color: #e4e6eb;
-}
-
-:root {
-  --hsg-green: #00802F;
-  --hsg-green-darker: #006023;
-  --hsg-green-lighter: #a5d6a7;
-  --hsg-green-darkmode: #4CAF50; 
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
+/* === Container Defaults (Bootstrap override) === */
 .container-fluid {
-  padding-right: 15px; 
-  padding-left: 15px;  
-  margin-right: auto;
-  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin: 0 auto;
   width: 100%;
 }
 
+/* === Links === */
 a {
   color: var(--hsg-green);
   text-decoration: none;
@@ -72,10 +50,55 @@ a:hover {
   text-decoration: underline;
 }
 
+/* === Visually Hidden für Screenreader etc. === */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* === CSS Variablen === */
+:root {
+  --hsg-green: #00802F;
+  --hsg-green-darker: #006023;
+  --hsg-green-lighter: #a5d6a7;
+  --hsg-green-darkmode: #4CAF50;
+}
+
+/* === Dark Mode === */
+html[data-bs-theme="dark"],
+[data-bs-theme="dark"] {
+  background-color: #0c0d0e;
+  color: #e4e6eb;
+}
+
+html[data-bs-theme="dark"] body,
+[data-bs-theme="dark"] body {
+  background-color: #0c0d0e !important;
+  color: #e4e6eb !important;
+}
+
+/* Links im Dark Mode */
 [data-bs-theme="dark"] a {
   color: var(--hsg-green-darkmode);
 }
 
 [data-bs-theme="dark"] a:hover {
   color: #73c991;
+}
+
+/* Fallback für Layout-Hintergrund in Dark Mode */
+[data-bs-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-color: #0c0d0e;
+  z-index: -1;
+  pointer-events: none;
 }

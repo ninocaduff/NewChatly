@@ -1,62 +1,63 @@
 :host {
-  display: block; /* Ensures the component takes up block space */
-}
-
-.message-entry {
-    margin-bottom: 10px; /* Slightly reduced margin */
-}
-
-.message-bubble {
-    background-color: #f8f9fa; /* Light mode bubble background */
-    padding: 8px 12px; /* Slightly reduced padding */
-    border-radius: 12px; /* More rounded */
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #e9ecef; /* Light mode bubble border */
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-
-.message-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 4px;
-}
-
-.message-username {
-    font-weight: bold;
-    color: #00802F; /* HSG Green for username */
-    font-size: 0.85em;
-}
-
-.message-timestamp {
-    font-size: 0.75em;
-    color: #6c757d; /* Muted color for time */
-}
-
-.message-text {
-    font-size: 0.95em;
-    line-height: 1.45;
-    word-wrap: break-word;
-    white-space: pre-wrap; 
-    color: #212529; 
-    margin: 0; 
-}
-
-/* Dark Mode Styles for Messages - Significantly Darker */
-[data-bs-theme="dark"] .message-bubble {
-    background-color: #222529; /* Very dark gray, almost black */
-    border-color: #33373b; /* Slightly lighter border for definition */
-}
-
-[data-bs-theme="dark"] .message-username {
-    color: #4CAF50; /* Brighter HSG Green for dark mode */
-}
-
-[data-bs-theme="dark"] .message-timestamp {
-    color: #98a0a6; /* Lighter gray for timestamp */
-}
-
-[data-bs-theme="dark"] .message-text {
-    color: #e8eaed; /* Light gray/off-white for text */
-}
+    display: block;
+  }
+  
+  .message-entry {
+      margin-bottom: 10px;
+  }
+  
+  .message-bubble {
+      background-color: #f8f9fa;
+      padding: 8px 12px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #e9ecef;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  
+  .message-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+  }
+  
+  .message-username {
+      font-weight: bold;
+      color: #00802F;
+      font-size: 0.85em;
+  }
+  
+  .message-timestamp {
+      font-size: 0.75em;
+      color: #6c757d;
+  }
+  
+  .message-text {
+      font-size: 0.95em;
+      line-height: 1.45;
+      word-wrap: break-word;
+      white-space: pre-wrap; 
+      color: #212529; 
+      margin: 0; 
+  }
+  
+  /* Korrigierte Dark Mode Styles für Messages */
+  [data-bs-theme="dark"] .message-bubble {
+      background-color: #222529 !important; /* !important hinzugefügt */
+      border-color: #33373b !important; /* !important hinzugefügt */
+      color: #e8eaed !important; /* Textfarbe explizit setzen */
+  }
+  
+  [data-bs-theme="dark"] .message-username {
+      color: #4CAF50 !important; /* !important hinzugefügt */
+  }
+  
+  [data-bs-theme="dark"] .message-timestamp {
+      color: #98a0a6 !important; /* !important hinzugefügt */
+  }
+  
+  [data-bs-theme="dark"] .message-text {
+      color: #e8eaed !important; /* !important hinzugefügt */
+  }

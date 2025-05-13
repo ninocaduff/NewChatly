@@ -1,6 +1,14 @@
-import { Component, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
+import {
+  Component,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  ViewEncapsulation
+} from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { CommonModule } from "@angular/common"; // für *ngIf
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-chat-bar",
@@ -8,6 +16,7 @@ import { CommonModule } from "@angular/common"; // für *ngIf
   imports: [FormsModule, CommonModule],
   templateUrl: "./chat-bar.component.html",
   styleUrls: ["./chat-bar.component.css"],
+  encapsulation: ViewEncapsulation.None // <== Wichtig für globales Theme
 })
 export class ChatBarComponent implements AfterViewInit {
   @Output() submitMessage = new EventEmitter<string>();
@@ -23,30 +32,30 @@ export class ChatBarComponent implements AfterViewInit {
   }
 
   focusInput(): void {
-    if (this.chatInput && this.chatInput.nativeElement) {
+    if (this.chatInput?.nativeElement) {
       this.chatInput.nativeElement.focus();
     }
   }
 
   onInput(): void {
-    if (this.chatMessage.length > 500) {
-      this.warningMessage = "Die Nachricht darf maximal 500 Zeichen lang sein.";
-    } else {
-      this.warningMessage = "";
-    }
+    this.warningMessage =
+      this.chatMessage.length > 500
+        ? "Die Nachricht darf maximal 500 Zeichen lang sein."
+        : "";
   }
 
   addMessage(message: string): void {
     const trimmed = message.trim();
-    if (trimmed.length === 0) return;
+    if (!trimmed) return;
 
     if (trimmed.length > 500) {
-      this.warningMessage = "Die Nachricht darf maximal 500 Zeichen lang sein.";
+      this.warningMessage =
+        "Die Nachricht darf maximal 500 Zeichen lang sein.";
       return;
     }
-    this.warningMessage = "";
 
-    this.submitMessage.emit(trimmed); 
+    this.warningMessage = "";
+    this.submitMessage.emit(trimmed);
     this.chatMessage = "";
     this.focusInput();
   }
@@ -55,8 +64,7 @@ export class ChatBarComponent implements AfterViewInit {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       const trimmed = this.chatMessage.trim();
-      if (trimmed.length === 0) return;
-      this.addMessage(trimmed);
+      if (trimmed) this.addMessage(trimmed);
     }
   }
 }

@@ -1,12 +1,12 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common'; // For *ngIf, etc.
+import { Component, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 export interface ChatMessage {
-  id?: string; // Optional message ID
+  id?: string;
   username: string;
   message: string;
-  time: string; // Formatted time string
-  rawDate?: Date; // Optional raw date for more complex operations
+  time: string;
+  rawDate?: Date;
   ariaLabel?: string;
 }
 
@@ -16,10 +16,9 @@ export interface ChatMessage {
   imports: [CommonModule],
   templateUrl: './chat-message.component.html',
   styleUrls: ['./chat-message.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush // Good for performance with list items
+  encapsulation: ViewEncapsulation.None, // <- Hinzugefügt
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatMessageComponent {
   @Input() msg!: ChatMessage;
-
-  constructor() {}
 }
