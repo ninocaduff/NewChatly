@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { CommonModule } from "@angular/common";
-import { HeaderComponent } from "./components/header/header.component";
-import { FooterComponent } from "./components/footer/footer.component";
-import { ChatBarComponent } from "./components/chat-bar/chat-bar.component";
-import { ChatHistoryComponent } from "./components/chat-history/chat-history.component";
-import { NicknameDialogComponent } from "./components/nickname-dialog/nickname-dialog.component";
-import { ChatMessage } from "./components/chat-message/chat-message.component";
-import { UserProfileService } from "./services/user-profile.service";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ChatBarComponent } from './components/chat-bar/chat-bar.component';
+import { ChatHistoryComponent } from './components/chat-history/chat-history.component';
+import { NicknameDialogComponent } from './components/nickname-dialog/nickname-dialog.component';
+import { ChatMessage } from './components/chat-message/chat-message.component';
+import { UserProfileService } from './services/user-profile.service';
 
 @Component({
-  selector: "app-root",
+  selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
@@ -20,14 +20,14 @@ import { UserProfileService } from "./services/user-profile.service";
     ChatHistoryComponent,
     NicknameDialogComponent,
   ],
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"],
-  encapsulation: ViewEncapsulation.None // <== hinzugefügt
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  encapsulation: ViewEncapsulation.None, // <== hinzugefügt
 })
 export class AppComponent implements OnInit {
-  title = "Chatly";
+  title = 'Chatly';
   messages: ChatMessage[] = [];
-  nickname: string = "";
+  nickname: string = '';
   showNicknameDialog: boolean = true;
   private pollingInterval: any;
 
@@ -37,8 +37,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    document.documentElement.setAttribute("data-bs-theme", savedTheme);
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-bs-theme', savedTheme);
     this.nickname = this.userProfileService.getNickname();
     this.showNicknameDialog = !this.nickname;
     if (this.nickname) {
@@ -48,28 +48,45 @@ export class AppComponent implements OnInit {
 
   fetchChatHistory(): void {
     this.http
-      .get<any[]>("https://chatlyhsg.onrender.com/api/messages")
+      .get<any[]>('https://chatlyhsg.onrender.com/api/messages')
       .subscribe({
         next: (apiMessages) => {
+          const today = new Date().toDateString();
+          const yesterday = new Date(Date.now() - 86400000).toDateString(); // 24h ago
+
           this.messages = apiMessages
             .map((msg) => {
               const messageDate = new Date(msg.time);
+
               const timeStr = msg.time
-                ? messageDate.toLocaleString("de", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit"
+                ? messageDate.toLocaleTimeString('de', {
+                    hour: '2-digit',
+                    minute: '2-digit',
                   })
-                : "";
-              const ariaMessage = String(msg.message).replace(/<[^>]*>/g, "");
+                : '';
+
+              const ariaMessage = String(msg.message).replace(/<[^>]*>/g, '');
+
+              // ✅ Compute the date string (Heute, Gestern, etc.)
+              const dateString =
+                messageDate.toDateString() === today
+                  ? 'Heute'
+                  : messageDate.toDateString() === yesterday
+                  ? 'Gestern'
+                  : messageDate.toLocaleDateString('de', {
+                      day: '2-digit',
+                      month: '2-digit',
+                      year: 'numeric',
+                    });
+
               return {
                 id: msg._id || msg.id,
                 username: msg.username,
                 message: msg.message,
                 time: timeStr,
                 rawDate: messageDate,
+                dateString: dateString, // ✅ Now it's defined correctly
+                fromSelf: msg.username === this.nickname,
                 ariaLabel: `Nachricht von ${msg.username}: ${ariaMessage}, gesendet am ${timeStr}`,
               } as ChatMessage;
             })
@@ -79,17 +96,16 @@ export class AppComponent implements OnInit {
             );
         },
         error: (error) => {
-          console.error("Error fetching chat history:", error);
+          console.error('Error fetching chat history:', error);
           this.messages = [];
         },
       });
   }
-  
 
   messageSubmitted(messageText: string): void {
     if (!messageText.trim()) return;
     this.http
-      .post("https://chatlyhsg.onrender.com/api/messages", {
+      .post('https://chatlyhsg.onrender.com/api/messages', {
         username: this.nickname,
         message: messageText,
       })
@@ -98,7 +114,7 @@ export class AppComponent implements OnInit {
           this.fetchChatHistory();
         },
         error: (error) => {
-          console.error("Error sending message:", error);
+          console.error('Error sending message:', error);
         },
       });
   }

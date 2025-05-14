@@ -1,41 +1,80 @@
-import { AfterViewChecked, Component, ElementRef, Input, ViewChild, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+  ViewChildren,
+  QueryList,
+  ChangeDetectionStrategy,
+  ViewEncapsulation,
+} from '@angular/core';
 import { CommonModule } from '@angular/common'; // For *ngFor
-import { ChatMessage, ChatMessageComponent } from '../chat-message/chat-message.component'; 
+import {
+  ChatMessage,
+  ChatMessageComponent,
+} from '../chat-message/chat-message.component';
+import gsap from 'gsap';
 
 @Component({
   selector: 'app-chat-history',
   standalone: true,
-  imports: [CommonModule, ChatMessageComponent], 
+  imports: [CommonModule, ChatMessageComponent],
   templateUrl: './chat-history.component.html',
   styleUrls: ['./chat-history.component.css'],
-  encapsulation: ViewEncapsulation.None, 
-  changeDetection: ChangeDetectionStrategy.OnPush
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatHistoryComponent implements AfterViewChecked {
-  @Input() messages: ChatMessage[] = []; 
-  @ViewChild('scrollContainer') private scrollContainer!: ElementRef<HTMLDivElement>;
+  @Input() messages: ChatMessage[] = [];
+  @Input() isTyping: boolean = false;
+  @Input() typingUser: string = 'Lisa';
+  @ViewChildren('messageEntry')
+  messageElements!: QueryList<ElementRef<HTMLElement>>;
+  @ViewChild('scrollContainer')
+  private scrollContainer!: ElementRef<HTMLDivElement>;
   private previousScrollHeight = 0;
+  private hasAnimatedOnce = false;
+  @ViewChild('typingIndicator') typingIndicatorRef!: ElementRef;
 
   ngAfterViewChecked(): void {
     if (this.scrollContainer) {
       const el = this.scrollContainer.nativeElement;
       const currentScrollHeight = el.scrollHeight;
+
       if (currentScrollHeight > this.previousScrollHeight) {
+        if (this.hasAnimatedOnce) {
+          this.animateNewMessages();
+        }
         this.scrollToBottom();
         this.previousScrollHeight = currentScrollHeight;
+        this.hasAnimatedOnce = true;
       }
     }
   }
 
   private scrollToBottom(): void {
     try {
-      this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
+      this.scrollContainer.nativeElement.scrollTop =
+        this.scrollContainer.nativeElement.scrollHeight;
     } catch (err) {
       console.error('Auto-scroll failed:', err);
     }
   }
 
   trackByMessageId(index: number, message: ChatMessage): string | number {
-    return message.id || index; 
+    return message.id || index;
+  }
+
+  private animateNewMessages(): void {
+    const last = this.messageElements.last;
+    if (last) {
+      gsap.from(last.nativeElement, {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        ease: 'power2.out',
+      });
+    }
   }
 }

@@ -1,4 +1,9 @@
-import { Component, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  ViewEncapsulation,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export interface ChatMessage {
@@ -8,6 +13,8 @@ export interface ChatMessage {
   time: string;
   rawDate?: Date;
   ariaLabel?: string;
+  fromSelf?: boolean;
+  dateString?: string;
 }
 
 @Component({
@@ -17,7 +24,7 @@ export interface ChatMessage {
   templateUrl: './chat-message.component.html',
   styleUrls: ['./chat-message.component.css'],
   encapsulation: ViewEncapsulation.None, // <- Hinzugefügt
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatMessageComponent {
   @Input() msg!: ChatMessage;

@@ -1,12 +1,35 @@
-<div 
-  #scrollContainer 
-  class="chat-history-container" 
-  role="log" 
-  aria-live="polite" 
-  aria-atomic="false" 
-  aria-label="Nachrichtenverlauf">
-  <app-chat-message *ngFor="let msg of messages; trackBy: trackByMessageId" [msg]="msg"></app-chat-message>
-  <div *ngIf="messages.length === 0" class="empty-history-message" aria-label="Noch keine Nachrichten vorhanden.">
+<div
+  #scrollContainer
+  class="chat-history-container"
+  role="log"
+  aria-live="polite"
+  aria-atomic="false"
+  aria-label="Nachrichtenverlauf"
+>
+  <ng-container
+    *ngFor="let msg of messages; let i = index; trackBy: trackByMessageId"
+  >
+    <!-- Date Divider -->
+    <div
+      *ngIf="i === 0 || messages[i - 1].dateString !== msg.dateString"
+      class="date-divider"
+      role="separator"
+    >
+      {{ msg.dateString }}
+    </div>
+
+    <!-- Actual Message Component -->
+    <div #messageEntry>
+      <app-chat-message [msg]="msg"></app-chat-message>
+    </div>
+  </ng-container>
+
+  <!-- Empty Message Notice -->
+  <div
+    *ngIf="messages.length === 0"
+    class="empty-history-message"
+    aria-label="Noch keine Nachrichten vorhanden."
+  >
     Noch keine Nachrichten vorhanden.
   </div>
 </div>
