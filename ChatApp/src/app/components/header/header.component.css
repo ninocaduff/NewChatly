@@ -13,17 +13,19 @@
   
     display: flex;
     align-items: center;
-    justify-content: center; /* Center the logo wrapper */
+    justify-content: center;
   }
   
   .chatlylogo {
     position: absolute;
-    left: 49.5%;
+    left: 50%;
     transform: translateX(-50%);
     height: 50px;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
   }
   
-  /* Theme toggle button right-aligned with absolute positioning */
+  
   .theme-toggle-button {
     position: absolute;
     right: 20px;
@@ -44,10 +46,10 @@
   }
   
   [data-bs-theme="dark"] .theme-toggle-button {
-      background-color: #1a1a1a;
-      color: #f1f1f1;
-      border: 1px solid #444 !important; /* gleiche Outline wie Lightmode */
-  }  
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+    border: 1px solid #444 !important;
+  }
   
   [data-bs-theme="dark"] .theme-toggle-button:hover {
     background-color: #333;
@@ -57,22 +59,18 @@
     background-color: #f0f0f0;
   }
   
-  
-  /* Divider styles */
   .divider {
-    height: 1px; /* Thin line */
-    width: 90%; /* Not full page width */
-    background-color: #ccc; /* Light mode color */
-    position: fixed; /* Positioned relative to the viewport */
-    top: 70px; /* Directly below the header (header height is 70px, top is 0) */
+    height: 1px;
+    width: 90%;
+    background-color: #ccc;
+    position: fixed;
+    top: 70px;
     left: 50%;
-    transform: translateX(-50%); /* Center the divider */
-    z-index: 1049; /* Below header (1050), ensures it's above general page content if header overlaps */
+    transform: translateX(-50%);
+    z-index: 1049;
   }
   
-  /* Dark mode override for the divider */
   [data-bs-theme="dark"] .divider {
-    background-color: #444; /* Dark mode color */
+    background-color: #444;
   }
-  
   
