@@ -24,6 +24,16 @@
     </div>
   </ng-container>
 
+  <!-- ✅ Typing indicator -->
+  <div
+    *ngIf="isTyping"
+    class="typing-indicator"
+    aria-live="polite"
+    [attr.aria-label]="typingUser + ' tippt gerade'"
+  >
+    💬 {{ typingUser }} tippt ...
+  </div>
+
   <!-- Empty Message Notice -->
   <div
     *ngIf="messages.length === 0"

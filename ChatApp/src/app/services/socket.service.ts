@@ -40,6 +40,7 @@ export class SocketService {
   onTyping(): Observable<{ username: string }> {
     return new Observable((observer) => {
       this.socket.on('typing', (data) => {
+        console.log('📨 Typing:', data);
         observer.next(data);
       });
     });

@@ -54,3 +54,24 @@
   background-color: #2f2f2f;
   color: #aaa;
 }
+
+.typing-indicator {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #6c757d;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}

@@ -29,7 +29,7 @@ import gsap from 'gsap';
 export class ChatHistoryComponent implements AfterViewChecked {
   @Input() messages: ChatMessage[] = [];
   @Input() isTyping: boolean = false;
-  @Input() typingUser: string = 'Lisa';
+  @Input() typingUser: string = '';
 
   @ViewChildren('messageEntry')
   messageElements!: QueryList<ElementRef<HTMLElement>>;
