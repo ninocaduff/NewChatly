@@ -2,31 +2,31 @@
   background-color: #ffffff;
   color: #000000;
   padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: "Montserrat", sans-serif;
+  height: 70px;
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   z-index: 1050;
   box-sizing: border-box;
-  height: 70px; /* Explicit height */
-}
+  font-family: "Montserrat", sans-serif;
 
-.header {
-  justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the logo wrapper */
 }
 
 .chatlylogo {
+  position: absolute;
+  left: 49.5%;
+  transform: translateX(-50%);
   height: 50px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
+/* Theme toggle button right-aligned with absolute positioning */
 .theme-toggle-button {
+  position: absolute;
+  right: 20px;
   background-color: #ffffff;
   border: 1px solid #ccc !important;
   color: #333;
@@ -37,19 +37,7 @@
   line-height: 1;
 }
 
-.theme-toggle-button:hover {
-  background-color: #f0f0f0;
-}
-
-.theme-toggle-button .theme-icon {
-  display: inline-block;
-}
-
-.divider {
-  height: 1px;
-  background-color: #ccc;
-}
-
+/* Dark mode overrides */
 [data-bs-theme="dark"] .header {
   background-color: #1a1a1a;
   color: #f1f1f1;
@@ -64,6 +52,6 @@
   background-color: #333;
 }
 
-[data-bs-theme="dark"] .divider {
-  background-color: #444;
+.theme-toggle-button:hover {
+  background-color: #f0f0f0;
 }

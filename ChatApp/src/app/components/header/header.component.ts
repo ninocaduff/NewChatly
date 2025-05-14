@@ -8,7 +8,7 @@ import gsap from 'gsap';
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
-  currentTheme: 'light' | 'dark' = 'light'; // ✅ HIER EINFÜGEN
+  currentTheme: 'light' | 'dark' = 'light';
 
   constructor() {}
 
@@ -16,7 +16,7 @@ export class HeaderComponent {
     const currentTheme = document.documentElement.getAttribute('data-bs-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
-    this.currentTheme = newTheme; // ✅ aktualisiere Property
+    this.currentTheme = newTheme;
 
     document.documentElement.setAttribute('data-bs-theme', newTheme);
     localStorage.setItem('theme', newTheme);

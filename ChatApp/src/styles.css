@@ -4,10 +4,12 @@
 html {
   height: 100%;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -20,6 +22,11 @@ body {
   flex-direction: column;
   font-family: inherit;
   line-height: 1.6;
+  background-image: url("/wavehaikei.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-color: #e9ecef;
   color: #212529;
   padding-top: 70px; /* Für fixierten Header */
@@ -65,10 +72,10 @@ a:hover {
 
 /* === CSS Variablen === */
 :root {
-  --hsg-green: #00802F;
+  --hsg-green: #00802f;
   --hsg-green-darker: #006023;
   --hsg-green-lighter: #a5d6a7;
-  --hsg-green-darkmode: #4CAF50;
+  --hsg-green-darkmode: #4caf50;
 }
 
 /* === Dark Mode === */
@@ -80,6 +87,11 @@ html[data-bs-theme="dark"],
 
 html[data-bs-theme="dark"] body,
 [data-bs-theme="dark"] body {
+  background-image: url("/wavehaikeidark.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-color: #0c0d0e !important;
   color: #e4e6eb !important;
 }
