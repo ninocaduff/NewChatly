@@ -17,6 +17,7 @@
   *ngIf="showNicknameDialog"
   [error]="nicknameError"
   (nicknameSubmitted)="setNickname($event)"
+  (clearedError)="nicknameError = ''"
 >
 </app-nickname-dialog>
 

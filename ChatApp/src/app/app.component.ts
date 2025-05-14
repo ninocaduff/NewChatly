@@ -127,9 +127,28 @@ export class AppComponent implements OnInit {
   }
 
   setNickname(nickname: string): void {
-    this.nickname = nickname;
-    this.userProfileService.saveNickname(nickname);
-    this.showNicknameDialog = false;
-    this.startPolling();
+    this.nicknameError = ''; // clear previous error
+
+    this.http
+      .post('https://chatlyhsg.onrender.com/api/nickname', {
+        username: nickname,
+      })
+      .subscribe({
+        next: () => {
+          this.nickname = nickname;
+          this.userProfileService.saveNickname(nickname);
+          this.showNicknameDialog = false;
+          this.startPolling();
+        },
+        error: (err) => {
+          if (err.status === 409) {
+            this.nicknameError = '❗Dieser Benutzername ist bereits vergeben.';
+          } else {
+            this.nicknameError =
+              '⚠️ Beim Registrieren ist ein Fehler aufgetreten.';
+            console.error(err);
+          }
+        },
+      });
   }
 }
