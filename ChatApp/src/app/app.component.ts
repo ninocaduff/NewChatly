@@ -32,6 +32,9 @@ export class AppComponent implements OnInit {
   showNicknameDialog: boolean = true;
   nicknameError: string = '';
 
+  isTyping = false;
+  typingUser = '';
+
   constructor(
     private userProfileService: UserProfileService,
     private http: HttpClient,
@@ -124,6 +127,12 @@ export class AppComponent implements OnInit {
     };
 
     this.socketService.sendMessage(msg);
+  }
+
+  handleTyping(): void {
+    if (this.nickname) {
+      this.socketService.sendTyping(this.nickname);
+    }
   }
 
   parseMessage(msg: any): ChatMessage {

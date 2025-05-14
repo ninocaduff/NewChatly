@@ -16,16 +16,30 @@ export class SocketService {
     });
   }
 
-  // Send message to server
+  // ✅ Send message to server
   sendMessage(message: any): void {
     this.socket.emit('newMessage', message);
   }
 
-  // Listen for new messages from server
+  // ✅ Listen for messages from server
   onMessage(): Observable<any> {
     return new Observable((observer) => {
       this.socket.on('newMessage', (data) => {
         console.log('📨 Received from server:', data);
+        observer.next(data);
+      });
+    });
+  }
+
+  // ✅ Send typing event
+  sendTyping(username: string): void {
+    this.socket.emit('typing', { username });
+  }
+
+  // ✅ Listen for typing events
+  onTyping(): Observable<{ username: string }> {
+    return new Observable((observer) => {
+      this.socket.on('typing', (data) => {
         observer.next(data);
       });
     });

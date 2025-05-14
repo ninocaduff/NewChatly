@@ -111,6 +111,11 @@ io.on("connection", (socket) => {
     io.emit("newMessage", msg); // Broadcast to all
   });
 
+  socket.on("typing", (data) => {
+    // Broadcast typing event to all other users
+    socket.broadcast.emit("typing", data); // ✅ sends { username } to others
+  });
+
   socket.on("disconnect", () => {
     console.log("🔌 Client disconnected");
   });

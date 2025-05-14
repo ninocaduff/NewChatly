@@ -9,7 +9,11 @@
     <h1 class="visually-hidden">{{ title }}</h1>
     <app-chat-history [messages]="messages"></app-chat-history>
     <div class="spacer-between"></div>
-    <app-chat-bar (submitMessage)="messageSubmitted($event)"></app-chat-bar>
+    <app-chat-bar
+      (submitMessage)="messageSubmitted($event)"
+      (typing)="handleTyping()"
+    >
+    </app-chat-bar>
   </main>
 </div>
 
