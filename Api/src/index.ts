@@ -2,6 +2,9 @@
 import express, { Request, Response } from "express";
 import cors from "cors"; // ✅ Import cors
 import path from "path"; // ✅ Import path
+import { createServer } from "http";
+import { Server } from "socket.io";
+
 // TypeScript-Interface für unsere Nachrichtenstruktur
 interface Message {
   username: string;
@@ -92,6 +95,27 @@ app.get("*", (req: Request, res: Response) => {
 
 // Server starten
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server läuft auf Port ${PORT}`);
+
+const server = createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*", // You can restrict to frontend origin later
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("🟢 Client connected via WebSocket");
+
+  socket.on("newMessage", (msg: Message) => {
+    chatHistory.push(msg);
+    io.emit("newMessage", msg); // Broadcast to all
+  });
+
+  socket.on("disconnect", () => {
+    console.log("🔌 Client disconnected");
+  });
+});
+
+server.listen(PORT, () => {
+  console.log(`✅ Server läuft auf Port ${PORT} mit WebSocket-Unterstützung`);
 });

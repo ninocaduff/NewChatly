@@ -8,6 +8,7 @@ import { ChatHistoryComponent } from './components/chat-history/chat-history.com
 import { NicknameDialogComponent } from './components/nickname-dialog/nickname-dialog.component';
 import { ChatMessage } from './components/chat-message/chat-message.component';
 import { UserProfileService } from './services/user-profile.service';
+import { SocketService } from './services/socket.service';
 
 @Component({
   selector: 'app-root',
@@ -30,11 +31,11 @@ export class AppComponent implements OnInit {
   nickname: string = '';
   showNicknameDialog: boolean = true;
   nicknameError: string = '';
-  private pollingInterval: any;
 
   constructor(
     private userProfileService: UserProfileService,
-    private http: HttpClient
+    private http: HttpClient,
+    private socketService: SocketService
   ) {}
 
   ngOnInit(): void {
@@ -42,8 +43,14 @@ export class AppComponent implements OnInit {
     document.documentElement.setAttribute('data-bs-theme', savedTheme);
     this.nickname = this.userProfileService.getNickname();
     this.showNicknameDialog = !this.nickname;
+
     if (this.nickname) {
-      this.startPolling();
+      this.fetchChatHistory(); // ✅ load existing messages once
+
+      // ✅ live updates via WebSocket
+      this.socketService.onMessage().subscribe((msg) => {
+        this.messages.push(this.parseMessage(msg));
+      });
     }
   }
 
@@ -105,25 +112,48 @@ export class AppComponent implements OnInit {
 
   messageSubmitted(messageText: string): void {
     if (!messageText.trim()) return;
-    this.http
-      .post('https://chatlyhsg.onrender.com/api/messages', {
-        username: this.nickname,
-        message: messageText,
-      })
-      .subscribe({
-        next: () => {
-          this.fetchChatHistory();
-        },
-        error: (error) => {
-          console.error('Error sending message:', error);
-        },
-      });
+
+    const msg = {
+      username: this.nickname,
+      message: messageText,
+      timestamp: new Date().toISOString(),
+    };
+
+    this.socketService.sendMessage(msg);
   }
 
-  private startPolling(): void {
-    this.fetchChatHistory();
-    if (this.pollingInterval) clearInterval(this.pollingInterval);
-    this.pollingInterval = setInterval(() => this.fetchChatHistory(), 5000);
+  parseMessage(msg: any): ChatMessage {
+    const messageDate = new Date(msg.timestamp);
+
+    const timeStr = messageDate.toLocaleTimeString('de', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    const today = new Date().toDateString();
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+
+    const dateString =
+      messageDate.toDateString() === today
+        ? 'Heute'
+        : messageDate.toDateString() === yesterday
+        ? 'Gestern'
+        : messageDate.toLocaleDateString('de', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          });
+
+    return {
+      id: msg._id || msg.id,
+      username: msg.username,
+      message: msg.message,
+      time: timeStr,
+      rawDate: messageDate,
+      dateString: dateString,
+      fromSelf: msg.username === this.nickname,
+      ariaLabel: `Nachricht von ${msg.username}: ${msg.message}, gesendet am ${timeStr}`,
+    };
   }
 
   setNickname(nickname: string): void {
@@ -138,7 +168,13 @@ export class AppComponent implements OnInit {
           this.nickname = nickname;
           this.userProfileService.saveNickname(nickname);
           this.showNicknameDialog = false;
-          this.startPolling();
+
+          this.fetchChatHistory(); // load existing
+
+          // ✅ Enable WebSocket stream
+          this.socketService.onMessage().subscribe((msg) => {
+            this.messages.push(this.parseMessage(msg));
+          });
         },
         error: (err) => {
           if (err.status === 409) {
