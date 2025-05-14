@@ -7,7 +7,7 @@ import {
   ViewChildren,
   QueryList,
   ChangeDetectionStrategy,
-  ChangeDetectorRef, // 👈 ADD THIS
+  ChangeDetectorRef,
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -40,7 +40,7 @@ export class ChatHistoryComponent implements AfterViewChecked {
   private previousScrollHeight = 0;
   private hasAnimatedOnce = false;
 
-  constructor(private cdr: ChangeDetectorRef) {} // 👈 inject manually
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngAfterViewChecked(): void {
     if (this.scrollContainer) {

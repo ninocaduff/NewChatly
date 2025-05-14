@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat-bar',
@@ -16,7 +18,7 @@ import { CommonModule } from '@angular/common';
   imports: [FormsModule, CommonModule],
   templateUrl: './chat-bar.component.html',
   styleUrls: ['./chat-bar.component.css'],
-  encapsulation: ViewEncapsulation.None, // <== Wichtig für globales Theme
+  encapsulation: ViewEncapsulation.None,
 })
 export class ChatBarComponent implements AfterViewInit {
   @Output() submitMessage = new EventEmitter<string>();
@@ -26,10 +28,17 @@ export class ChatBarComponent implements AfterViewInit {
   chatMessage: string = '';
   warningMessage: string = '';
 
+  private typingSubject = new Subject<void>();
+
   constructor() {}
 
   ngAfterViewInit(): void {
     this.focusInput();
+
+    // ⏱️ Emit typing event only after 300ms pause
+    this.typingSubject.pipe(debounceTime(300)).subscribe(() => {
+      this.typing.emit();
+    });
   }
 
   focusInput(): void {
@@ -44,7 +53,7 @@ export class ChatBarComponent implements AfterViewInit {
         ? 'Die Nachricht darf maximal 500 Zeichen lang sein.'
         : '';
 
-    this.typing.emit();
+    this.typingSubject.next(); // 🔁 Trigger debounced "typing"
   }
 
   addMessage(message: string): void {

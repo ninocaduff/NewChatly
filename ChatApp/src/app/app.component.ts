@@ -35,6 +35,8 @@ export class AppComponent implements OnInit {
   isTyping = false;
   typingUser = '';
 
+  private typingTimeout: any = null;
+
   constructor(
     private userProfileService: UserProfileService,
     private http: HttpClient,
@@ -55,22 +57,35 @@ export class AppComponent implements OnInit {
   private initializeChat(): void {
     this.fetchChatHistory();
 
-    // 🔄 Nachrichten empfangen
     this.socketService.onMessage().subscribe((msg) => {
-      console.log('📩 New socket message:', msg);
       this.messages.push(this.parseMessage(msg));
+
+      // ✅ Clear typing indicator if the sender matches the typing user
+      if (msg.username === this.typingUser) {
+        this.isTyping = false;
+        this.typingUser = '';
+        if (this.typingTimeout) {
+          clearTimeout(this.typingTimeout);
+          this.typingTimeout = null;
+        }
+      }
     });
 
-    // 🔄 Typing-Indikator empfangen
     this.socketService.onTyping().subscribe((data: { username: string }) => {
       if (data.username !== this.nickname) {
         this.typingUser = data.username;
         this.isTyping = true;
 
-        setTimeout(() => {
+        // 🧼 Clear old timeout before starting a new one
+        if (this.typingTimeout) {
+          clearTimeout(this.typingTimeout);
+        }
+
+        // 🕐 Hide indicator after 5s if no further typing
+        this.typingTimeout = setTimeout(() => {
           this.isTyping = false;
           this.typingUser = '';
-        }, 5000);
+        }, 3000);
       }
     });
   }
