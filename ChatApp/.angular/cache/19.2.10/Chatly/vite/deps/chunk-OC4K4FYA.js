@@ -1,7 +1,7 @@
 import {
   DOCUMENT,
   isPlatformBrowser
-} from "./chunk-BWXENPV2.js";
+} from "./chunk-VJTINMKR.js";
 import {
   ApplicationRef,
   Attribute,
@@ -31,7 +31,6 @@ import {
   Renderer2,
   RendererStyleFlags2,
   RuntimeError,
-  Subject,
   TemplateRef,
   Version,
   ViewContainerRef,
@@ -61,12 +60,15 @@ import {
   ɵɵinject,
   ɵɵinjectAttribute,
   ɵɵstyleProp
-} from "./chunk-6LYTUEHS.js";
+} from "./chunk-WU6ACM5G.js";
+import {
+  Subject
+} from "./chunk-P6U2JBMQ.js";
 import {
   __async,
   __spreadProps,
   __spreadValues
-} from "./chunk-WDMUDEB6.js";
+} from "./chunk-XWLXMCJQ.js";
 
 // node_modules/@angular/common/fesm2022/location-DpBxd_aX.mjs
 var _DOM = null;
@@ -5127,4 +5129,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-27QVAXJE.js.map
+//# sourceMappingURL=chunk-OC4K4FYA.js.map
