@@ -30,6 +30,7 @@
   background-color: #ffffff;
   color: #333;
   line-height: 1.4;
+  transition: none !important;
 }
 
 .chat-textarea:focus {

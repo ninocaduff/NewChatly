@@ -23,8 +23,7 @@
     height: 50px;
     transform-style: preserve-3d;
     backface-visibility: hidden;
-  }
-  
+  }  
   
   .theme-toggle-button {
     position: absolute;
