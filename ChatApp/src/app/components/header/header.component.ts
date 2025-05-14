@@ -8,17 +8,19 @@ import gsap from 'gsap';
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
+  currentTheme: 'light' | 'dark' = 'light'; // ✅ HIER EINFÜGEN
+
   constructor() {}
 
   toggleTheme(): void {
     const currentTheme = document.documentElement.getAttribute('data-bs-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
-    // 1. Set the theme first (invisible switch)
+    this.currentTheme = newTheme; // ✅ aktualisiere Property
+
     document.documentElement.setAttribute('data-bs-theme', newTheme);
     localStorage.setItem('theme', newTheme);
 
-    // 2. Then animate visible components to new theme
     gsap.fromTo(
       document.body,
       {

@@ -1,11 +1,20 @@
 <header class="header" role="banner">
-    <img src="../../../../hsglogo.svg" alt="Logo der Universität St. Gallen: grüne abstrakte Figur aus Linien, die eine Person darstellen, daneben der Text 'Universität St. Gallen'" class="hsglogo">
-    <button 
-      class="btn theme-toggle-button"
-      (click)="toggleTheme()"
-      aria-label="Darstellung wechseln (Hell/Dunkel)"
-      title="Darstellung wechseln (Hell/Dunkel)">
-      <span class="theme-icon" aria-hidden="true">🌓</span>
-    </button>
+  <img
+    [src]="
+      currentTheme === 'dark'
+        ? '../../../../chatlylogodark.png'
+        : '../../../../chatlylogo.png'
+    "
+    alt="Logo der ChatApp Chatly, das eine Sprechblase mit einem C zeigt"
+    class="chatlylogo"
+  />
+  <button
+    class="btn theme-toggle-button"
+    (click)="toggleTheme()"
+    aria-label="Darstellung wechseln (Hell/Dunkel)"
+    title="Darstellung wechseln (Hell/Dunkel)"
+  >
+    <span class="theme-icon" aria-hidden="true">🌓</span>
+  </button>
 </header>
 <div class="divider"></div>
