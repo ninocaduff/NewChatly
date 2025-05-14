@@ -1,7 +1,11 @@
 <app-header></app-header>
 
 <div class="container-fluid app-container">
-  <main role="main" aria-label="Chat-Anwendung Hauptbereich" class="chat-main col-12 col-md-10 col-lg-10">
+  <main
+    role="main"
+    aria-label="Chat-Anwendung Hauptbereich"
+    class="chat-main col-12 col-md-10 col-lg-10"
+  >
     <h1 class="visually-hidden">{{ title }}</h1>
     <app-chat-history [messages]="messages"></app-chat-history>
     <div class="spacer-between"></div>
@@ -9,5 +13,11 @@
   </main>
 </div>
 
-<app-nickname-dialog *ngIf="showNicknameDialog" (nicknameSubmitted)="setNickname($event)"></app-nickname-dialog>
+<app-nickname-dialog
+  *ngIf="showNicknameDialog"
+  [error]="nicknameError"
+  (nicknameSubmitted)="setNickname($event)"
+>
+</app-nickname-dialog>
+
 <app-footer></app-footer>

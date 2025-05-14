@@ -22,13 +22,14 @@ import { UserProfileService } from './services/user-profile.service';
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None, // <== hinzugefügt
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
   title = 'Chatly';
   messages: ChatMessage[] = [];
   nickname: string = '';
   showNicknameDialog: boolean = true;
+  nicknameError: string = '';
   private pollingInterval: any;
 
   constructor(
@@ -126,29 +127,9 @@ export class AppComponent implements OnInit {
   }
 
   setNickname(nickname: string): void {
-    this.http
-      .post('https://chatlyhsg.onrender.com/api/nickname', {
-        username: nickname,
-      })
-      .subscribe({
-        next: () => {
-          this.nickname = nickname;
-          this.userProfileService.saveNickname(nickname);
-          this.showNicknameDialog = false;
-          this.startPolling();
-        },
-        error: (err) => {
-          if (err.status === 409) {
-            alert(
-              '❗Dieser Benutzername ist bereits vergeben. Bitte wähle einen anderen.'
-            );
-          } else {
-            alert(
-              '⚠️ Beim Registrieren des Benutzernamens ist ein Fehler aufgetreten.'
-            );
-            console.error(err);
-          }
-        },
-      });
+    this.nickname = nickname;
+    this.userProfileService.saveNickname(nickname);
+    this.showNicknameDialog = false;
+    this.startPolling();
   }
 }

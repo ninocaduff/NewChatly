@@ -41,9 +41,12 @@ app.post("/api/messages", (req: Request, res: Response) => {
   return res.status(201).json(newMessage);
 });
 
-// POST-Endpunkt zur Registrierung eines einzigartigen Benutzernamens
 app.post("/api/nickname", (req: Request, res: Response) => {
   const { username } = req.body;
+
+  console.log("➡️  Received body:", req.body);
+  console.log("👤 Username received:", username);
+  console.log("📦 Current active usernames:", [...activeUsernames]);
 
   if (!username || typeof username !== "string") {
     return res.status(400).json({ error: "Username ist erforderlich" });
@@ -54,10 +57,6 @@ app.post("/api/nickname", (req: Request, res: Response) => {
   }
 
   activeUsernames.add(username);
-
-  // Optional: Ablauf nach 10 Minuten (damit verlassene Namen wieder freigegeben werden)
-  // setTimeout(() => activeUsernames.delete(username), 10 * 60 * 1000);
-
   return res.status(200).json({ message: "Benutzername registriert" });
 });
 

@@ -1,21 +1,24 @@
-<div 
-  class="nickname-dialog-overlay" 
-  role="dialog" 
-  aria-modal="true" 
+<div
+  class="nickname-dialog-overlay"
+  role="dialog"
+  aria-modal="true"
   aria-labelledby="nicknameDialogTitle"
-  aria-describedby="nicknameDialogDescription">
+  aria-describedby="nicknameDialogDescription"
+>
   <div class="nickname-dialog">
     <h2 id="nicknameDialogTitle">Willkommen bei Chatly!</h2>
-    <p id="nicknameDialogDescription">Bitte gib deinen Nickname ein, um zu chatten.</p>
+    <p id="nicknameDialogDescription">
+      Bitte gib deinen Nickname ein, um zu chatten.
+    </p>
     <form (ngSubmit)="submitNickname()" aria-label="Nickname Formular">
       <label for="nicknameInput" class="visually-hidden">Dein Nickname</label>
       <div class="input-wrapper position-relative">
-        <input 
+        <input
           #nicknameInputRef
           id="nicknameInput"
           name="nickname"
-          type="text" 
-          class="form-control nickname-input-field pe-5" 
+          type="text"
+          class="form-control nickname-input-field pe-5"
           [(ngModel)]="nickname"
           placeholder="Dein Nickname"
           (keydown.enter)="submitNickname()"
@@ -24,19 +27,27 @@
           required
           aria-required="true"
           maxlength="30"
-          autocomplete="nickname">
+          autocomplete="nickname"
+        />
         <span class="char-counter-name" aria-live="polite" aria-atomic="true">
-          {{ nickname.length || 0 }}/30 Zeichen <!-- Corrected: removed ?. -->
+          {{ nickname.length || 0 }}/30 Zeichen
+          <!-- Corrected: removed ?. -->
         </span>
       </div>
       <div *ngIf="warningMessage" class="alert alert-warning mt-2" role="alert">
         {{ warningMessage }}
       </div>
-      <button 
+      <div *ngIf="error" class="alert alert-danger mt-2" role="alert">
+        {{ error }}
+      </div>
+      <button
         type="submit"
         class="btn btn-success nickname-submit-button mt-3"
-        [disabled]="!nickname.trim() || nickname.length > 30 || nickname.length === 0"
-        aria-label="Nickname bestätigen und Chat starten">
+        [disabled]="
+          !nickname.trim() || nickname.length > 30 || nickname.length === 0
+        "
+        aria-label="Nickname bestätigen und Chat starten"
+      >
         Starten
       </button>
     </form>
