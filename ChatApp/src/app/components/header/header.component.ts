@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import gsap from 'gsap';
 
 @Component({
@@ -7,22 +7,14 @@ import gsap from 'gsap';
   styleUrls: ['./header.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent implements OnInit {
-  currentTheme: 'light' | 'dark' = 'light';
-
-  ngOnInit(): void {
-    const savedTheme = localStorage.getItem('theme');
-    const theme = savedTheme || document.documentElement.getAttribute('data-bs-theme') || 'light';
-    this.currentTheme = theme as 'light' | 'dark';
-    document.documentElement.setAttribute('data-bs-theme', this.currentTheme);
-  }
+export class HeaderComponent {
+  currentTheme: 'light' | 'dark' = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'dark' : 'light';
 
   toggleTheme(): void {
     const currentTheme = document.documentElement.getAttribute('data-bs-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
     this.currentTheme = newTheme;
-
     document.documentElement.setAttribute('data-bs-theme', newTheme);
     localStorage.setItem('theme', newTheme);
 
@@ -37,19 +29,29 @@ export class HeaderComponent implements OnInit {
         color: newTheme === 'dark' ? '#e8eaed' : '#212529',
         duration: 0.4,
         ease: 'power1.out',
+        onComplete: () => {
+          document.body.style.removeProperty('background-color');
+          document.body.style.removeProperty('color');
+        }
       }
     );
 
-    gsap.fromTo(
-      '.header',
-      {
-        backgroundColor: currentTheme === 'dark' ? '#1c1e21' : '#ffffff',
-      },
-      {
-        backgroundColor: newTheme === 'dark' ? '#1c1e21' : '#ffffff',
-        duration: 0.4,
-        ease: 'power1.out',
-      }
-    );
+    const headerEl = document.querySelector('.header') as HTMLElement;
+    if (headerEl) {
+      gsap.fromTo(
+        headerEl,
+        {
+          backgroundColor: currentTheme === 'dark' ? '#1c1e21' : '#ffffff',
+        },
+        {
+          backgroundColor: newTheme === 'dark' ? '#1c1e21' : '#ffffff',
+          duration: 0.4,
+          ease: 'power1.out',
+          onComplete: () => {
+            headerEl.style.removeProperty('background-color');
+          }
+        }
+      );
+    }
   }
 }
