@@ -44,9 +44,10 @@
 }
 
 [data-bs-theme="dark"] .theme-toggle-button {
-  background-color: #1a1a1a;
-  color: #f1f1f1;
-}
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+    border: 1px solid #444 !important; /* gleiche Outline wie Lightmode */
+}  
 
 [data-bs-theme="dark"] .theme-toggle-button:hover {
   background-color: #333;
