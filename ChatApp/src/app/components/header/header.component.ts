@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import gsap from 'gsap';
 
 @Component({
@@ -7,10 +7,15 @@ import gsap from 'gsap';
   styleUrls: ['./header.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   currentTheme: 'light' | 'dark' = 'light';
 
-  constructor() {}
+  ngOnInit(): void {
+    const savedTheme = localStorage.getItem('theme');
+    const theme = savedTheme || document.documentElement.getAttribute('data-bs-theme') || 'light';
+    this.currentTheme = theme as 'light' | 'dark';
+    document.documentElement.setAttribute('data-bs-theme', this.currentTheme);
+  }
 
   toggleTheme(): void {
     const currentTheme = document.documentElement.getAttribute('data-bs-theme');
