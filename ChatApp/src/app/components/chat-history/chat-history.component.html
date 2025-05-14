@@ -1,9 +1,12 @@
 <div 
   #scrollContainer 
-  class="form-control" 
-  [innerHTML]="history" 
+  class="chat-history-container" 
   role="log" 
   aria-live="polite" 
   aria-atomic="false" 
   aria-label="Nachrichtenverlauf">
+  <app-chat-message *ngFor="let msg of messages; trackBy: trackByMessageId" [msg]="msg"></app-chat-message>
+  <div *ngIf="messages.length === 0" class="empty-history-message" aria-label="Noch keine Nachrichten vorhanden.">
+    Noch keine Nachrichten vorhanden.
+  </div>
 </div>

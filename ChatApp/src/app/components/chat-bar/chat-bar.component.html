@@ -1,29 +1,39 @@
-<div class="chat-bar position-relative">
+<div class="chat-bar" role="form" aria-labelledby="chatBarLabel">
+  <h2 id="chatBarLabel" class="visually-hidden">Nachrichteneingabe</h2>
   <label for="messageInput" class="visually-hidden">Nachricht eingeben</label>
-  <textarea
-    #chatInput
-    id="messageInput"
-    aria-label="Nachricht eingeben"
-    rows="3"
-    maxlength="500"
-    class="form-control chat-textarea pe-5"
-    placeholder="Schreibe eine Nachricht..."
-    [(ngModel)]="chatMessage"
-    (keydown)="onKeyDown($event)">
-  </textarea>
+  
+  <div class="textarea-wrapper">
+    <textarea
+      #chatInput
+      id="messageInput"
+      aria-label="Nachricht eingeben"
+      rows="2"
+      maxlength="500"
+      class="form-control chat-textarea"
+      placeholder="Schreibe eine Nachricht..."
+      [(ngModel)]="chatMessage"
+      (keydown)="onKeyDown($event)"
+      (input)="onInput()"
+      aria-required="false"
+      aria-multiline="true">
+    </textarea> <!-- Correctly closed tag -->
+  </div>
 
-  <!-- Character counter inside textarea -->
-  <div class="char-counter-text" aria-live="polite">
-    {{ chatMessage.length }}/500
+  <div class="char-counter-text" aria-live="polite" aria-atomic="true">
+    {{ chatMessage.length }}/500 Zeichen
   </div>
   
+  <div *ngIf="warningMessage" class="alert alert-warning mt-1" role="alert">
+    {{ warningMessage }}
+  </div>
 
-  <button 
-    class="btn btn-success chat-send-button mt-3" 
-    [disabled]="!chatMessage.trim()" 
-    (click)="addMessage(chatMessage)"
-    aria-label="Nachricht senden">
-    <strong>Senden</strong>
-  </button>
-
+  <div class="send-button-container">
+    <button 
+      class="btn btn-success chat-send-button"
+      [disabled]="!chatMessage.trim() || chatMessage.length > 500"
+      (click)="addMessage(chatMessage)"
+      aria-label="Nachricht senden">
+      <strong>Senden</strong>
+    </button>
+  </div>
 </div>

@@ -1,17 +1,21 @@
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100vw;
-    height: 40px;
-    background-color: #00802F;
-    padding: 10px 0;
+.footer {
+    background-color: #f8f9fa; 
+    color: #333;
+    padding: 15px 0; /* Reduced padding */
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.85em;
+    border-top: 1px solid #e0e0e0;
+    width: 100%;
+    margin-top: auto; 
 }
 
-.footer-content {
-    font-size: 13px;
-    text-align: center;
-    color: #FFFFFF;
-    font-weight: 500;
-    z-index: 1000;
-    font-family: 'Montserrat', sans-serif;
+.footer-content p {
+    margin: 0;
+}
+
+[data-bs-theme="dark"] .footer {
+    background-color: #18191a; /* Darker footer background */
+    color: #b0b3b8;
+    border-top: 1px solid #2a2b2c;
 }
