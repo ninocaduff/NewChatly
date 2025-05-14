@@ -53,5 +53,23 @@ export class HeaderComponent {
         }
       );
     }
+
+    const dividerEl = document.querySelector('.divider') as HTMLElement;
+    if (dividerEl) {
+      gsap.fromTo(
+        dividerEl,
+        {
+          backgroundColor: currentTheme === 'dark' ? '#444' : '#ccc',
+        },
+        {
+          backgroundColor: newTheme === 'dark' ? '#444' : '#ccc',
+          duration: 0.4,
+          ease: 'power1.out',
+          onComplete: () => {
+            dividerEl.style.removeProperty('background-color');
+          }
+        }
+      );
+    }
   }
 }
