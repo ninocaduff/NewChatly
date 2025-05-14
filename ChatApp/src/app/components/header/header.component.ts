@@ -21,11 +21,11 @@ export class HeaderComponent {
     gsap.fromTo(
       document.body,
       {
-        backgroundColor: currentTheme === 'dark' ? '#1c1e21' : '#ffffff',
+        backgroundColor: currentTheme === 'dark' ? '#1a1a1a' : '#f8f9fa',
         color: currentTheme === 'dark' ? '#e8eaed' : '#212529',
       },
       {
-        backgroundColor: newTheme === 'dark' ? '#1c1e21' : '#ffffff',
+        backgroundColor: newTheme === 'dark' ? '#1a1a1a' : '#f8f9fa',
         color: newTheme === 'dark' ? '#e8eaed' : '#212529',
         duration: 0.4,
         ease: 'power1.out',
@@ -41,10 +41,10 @@ export class HeaderComponent {
       gsap.fromTo(
         headerEl,
         {
-          backgroundColor: currentTheme === 'dark' ? '#1c1e21' : '#ffffff',
+          backgroundColor: currentTheme === 'dark' ? '#1a1a1a' : '#f8f9fa',
         },
         {
-          backgroundColor: newTheme === 'dark' ? '#1c1e21' : '#ffffff',
+          backgroundColor: newTheme === 'dark' ? '#1a1a1a' : '#f8f9fa',
           duration: 0.4,
           ease: 'power1.out',
           onComplete: () => {
