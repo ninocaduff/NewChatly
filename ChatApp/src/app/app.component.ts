@@ -45,13 +45,17 @@ export class AppComponent implements OnInit {
     this.showNicknameDialog = !this.nickname;
 
     if (this.nickname) {
-      this.fetchChatHistory(); // ✅ load existing messages once
-
-      // ✅ live updates via WebSocket
-      this.socketService.onMessage().subscribe((msg) => {
-        this.messages.push(this.parseMessage(msg));
-      });
+      this.initializeChat();
     }
+  }
+
+  private initializeChat(): void {
+    this.fetchChatHistory();
+
+    this.socketService.onMessage().subscribe((msg) => {
+      console.log('📩 New socket message:', msg); // Debug log
+      this.messages.push(this.parseMessage(msg));
+    });
   }
 
   fetchChatHistory(): void {
@@ -157,7 +161,7 @@ export class AppComponent implements OnInit {
   }
 
   setNickname(nickname: string): void {
-    this.nicknameError = ''; // clear previous error
+    this.nicknameError = '';
 
     this.http
       .post('https://chatlyhsg.onrender.com/api/nickname', {
@@ -169,12 +173,7 @@ export class AppComponent implements OnInit {
           this.userProfileService.saveNickname(nickname);
           this.showNicknameDialog = false;
 
-          this.fetchChatHistory(); // load existing
-
-          // ✅ Enable WebSocket stream
-          this.socketService.onMessage().subscribe((msg) => {
-            this.messages.push(this.parseMessage(msg));
-          });
+          this.initializeChat(); // ✅ centralizes fetch + socket
         },
         error: (err) => {
           if (err.status === 409) {
