@@ -83,7 +83,7 @@
 
 /* Dark Mode Styles - korrigiert und verstärkt */
 [data-bs-theme="dark"] .chat-bar {
-  background-color: #18191a !important; /* !important hinzugefügt */
+  background-color: #1a1a1a !important; /* !important hinzugefügt */
   border-color: #2a2b2c !important;
 }
 

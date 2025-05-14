@@ -15,7 +15,7 @@
 }
 
 [data-bs-theme="dark"] .footer {
-    background-color: #18191a; /* Darker footer background */
+    background-color: #1a1a1a; /* Darker footer background */
     color: #b0b3b8;
     border-top: 1px solid #2a2b2c;
 }
