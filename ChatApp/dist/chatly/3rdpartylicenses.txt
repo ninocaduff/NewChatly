@@ -301,6 +301,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 --------------------------------------------------------------------------------
+Package: gsap
+License: "Standard 'no charge' license: https://gsap.com/standard-license."
+
+
+--------------------------------------------------------------------------------
 Package: @angular/forms
 License: "MIT"
 
