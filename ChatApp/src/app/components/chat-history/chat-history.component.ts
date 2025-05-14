@@ -7,9 +7,10 @@ import {
   ViewChildren,
   QueryList,
   ChangeDetectionStrategy,
+  ChangeDetectorRef, // 👈 ADD THIS
   ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule } from '@angular/common'; // For *ngFor
+import { CommonModule } from '@angular/common';
 import {
   ChatMessage,
   ChatMessageComponent,
@@ -29,13 +30,17 @@ export class ChatHistoryComponent implements AfterViewChecked {
   @Input() messages: ChatMessage[] = [];
   @Input() isTyping: boolean = false;
   @Input() typingUser: string = 'Lisa';
+
   @ViewChildren('messageEntry')
   messageElements!: QueryList<ElementRef<HTMLElement>>;
+
   @ViewChild('scrollContainer')
   private scrollContainer!: ElementRef<HTMLDivElement>;
+
   private previousScrollHeight = 0;
   private hasAnimatedOnce = false;
-  @ViewChild('typingIndicator') typingIndicatorRef!: ElementRef;
+
+  constructor(private cdr: ChangeDetectorRef) {} // 👈 inject manually
 
   ngAfterViewChecked(): void {
     if (this.scrollContainer) {
@@ -50,6 +55,9 @@ export class ChatHistoryComponent implements AfterViewChecked {
         this.previousScrollHeight = currentScrollHeight;
         this.hasAnimatedOnce = true;
       }
+
+      // 👇 force update for OnPush strategy when messages come from WebSocket
+      this.cdr.markForCheck();
     }
   }
 
