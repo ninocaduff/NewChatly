@@ -55,9 +55,23 @@ export class AppComponent implements OnInit {
   private initializeChat(): void {
     this.fetchChatHistory();
 
+    // 🔄 Nachrichten empfangen
     this.socketService.onMessage().subscribe((msg) => {
-      console.log('📩 New socket message:', msg); // Debug log
+      console.log('📩 New socket message:', msg);
       this.messages.push(this.parseMessage(msg));
+    });
+
+    // 🔄 Typing-Indikator empfangen
+    this.socketService.onTyping().subscribe((data: { username: string }) => {
+      if (data.username !== this.nickname) {
+        this.typingUser = data.username;
+        this.isTyping = true;
+
+        setTimeout(() => {
+          this.isTyping = false;
+          this.typingUser = '';
+        }, 5000);
+      }
     });
   }
 
@@ -127,6 +141,9 @@ export class AppComponent implements OnInit {
     };
 
     this.socketService.sendMessage(msg);
+
+    this.isTyping = false;
+    this.typingUser = '';
   }
 
   handleTyping(): void {

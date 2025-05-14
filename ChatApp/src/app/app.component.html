@@ -7,7 +7,11 @@
     class="chat-main col-12 col-md-10 col-lg-10"
   >
     <h1 class="visually-hidden">{{ title }}</h1>
-    <app-chat-history [messages]="messages"></app-chat-history>
+    <app-chat-history
+      [messages]="messages"
+      [isTyping]="isTyping"
+      [typingUser]="typingUser"
+    ></app-chat-history>
     <div class="spacer-between"></div>
     <app-chat-bar
       (submitMessage)="messageSubmitted($event)"
