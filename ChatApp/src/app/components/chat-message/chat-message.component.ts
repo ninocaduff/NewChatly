@@ -15,6 +15,7 @@ export interface ChatMessage {
   ariaLabel?: string;
   fromSelf?: boolean;
   dateString?: string;
+  reactions?: { [emoji: string]: string[] };
 }
 
 @Component({

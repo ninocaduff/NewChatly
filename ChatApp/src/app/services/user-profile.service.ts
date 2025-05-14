@@ -9,10 +9,10 @@ export class UserProfileService {
   constructor() {}
 
   saveNickname(nickname: string): void {
-    localStorage.setItem(this.NICKNAME_KEY, nickname);
+    sessionStorage.setItem(this.NICKNAME_KEY, nickname);
   }
 
   getNickname(): string {
-    return localStorage.getItem(this.NICKNAME_KEY) || '';
+    return sessionStorage.getItem(this.NICKNAME_KEY) || '';
   }
 }
