@@ -18,6 +18,13 @@
   box-sizing: border-box;
 }
 
+/* Spezielle Anpassung für mobile Geräte mit geöffneter Tastatur */
+@media screen and (max-height: 600px) {
+  .chat-history-container {
+    max-height: calc(100vh - 330px); /* Reduzierter Wert für Tastatur-Modus */
+  }
+}
+
 [data-bs-theme="dark"] .chat-history-container {
   background-color: #1c1e21; /* Darker background for chat history */
   color: #e8eaed;
