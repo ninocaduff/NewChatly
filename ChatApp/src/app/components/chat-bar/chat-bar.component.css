@@ -43,10 +43,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 20px;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  padding-left: 10px;
+  height: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 5px;
   padding-right: 0;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .typing-indicator-placeholder {
-  height: 14px; /* Gleiche Höhe wie der Typing-Indikator */
+  height: 0; /* Reduziert auf 0, um keinen zusätzlichen Platz einzunehmen */
 }
 
 .char-counter-text {

@@ -1,7 +1,7 @@
 .chat-history-container {
   min-height: 300px; /* Reduced min-height */
   max-height: calc(
-    100vh - 280px
+    100vh - 290px
   ); /* Adjusted max-height to consider header, chatbar, footers, and paddings */
   width: 100%;
   max-width: 1100px;
