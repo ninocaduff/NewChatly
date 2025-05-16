@@ -10,14 +10,6 @@
     margin-top: auto; 
 }
 
-/* Spezielle Anpassung für mobile Geräte mit geöffneter Tastatur */
-@media screen and (max-height: 600px) {
-    .footer {
-        position: relative;
-        bottom: 0;
-    }
-}
-
 .footer-content p {
     margin: 0;
 }
