@@ -39,11 +39,36 @@
   box-shadow: 0 0 0 2px rgba(0, 128, 47, 0.3);
 }
 
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 20px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding-left: 10px;
+  padding-right: 0;
+}
+
+.typing-indicator-container {
+  flex: 1;
+  text-align: left;
+}
+
+.typing-indicator {
+  font-size: 0.75em;
+  color: #6c757d;
+  padding-left: 0;
+}
+
+.typing-indicator-placeholder {
+  height: 14px; /* Gleiche Höhe wie der Typing-Indikator */
+}
+
 .char-counter-text {
   font-size: 0.75em;
   color: #6c757d;
   text-align: right;
-  margin-top: -4px; 
   padding-right: 5px;
 }
 
@@ -98,6 +123,14 @@
 [data-bs-theme="dark"] .chat-textarea:focus {
   border-color: #4CAF50 !important; 
   box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.4);
+}
+
+[data-bs-theme="dark"] .typing-indicator {
+  color: #b0b3b8 !important; /* !important hinzugefügt */
+}
+
+[data-bs-theme="dark"] .typing-indicator-container {
+  color: #b0b3b8 !important;
 }
 
 [data-bs-theme="dark"] .char-counter-text {

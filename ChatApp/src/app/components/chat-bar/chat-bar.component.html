@@ -19,8 +19,16 @@
     </textarea> <!-- Correctly closed tag -->
   </div>
 
-  <div class="char-counter-text" aria-live="polite" aria-atomic="true">
-    {{ chatMessage.length }}/500 Zeichen
+  <div class="status-row">
+    <div class="typing-indicator-container" aria-live="polite">
+      <div *ngIf="isTyping" class="typing-indicator" [attr.aria-label]="typingUser + ' tippt gerade'">
+        💬 {{ typingUser }} tippt ...
+      </div>
+      <div *ngIf="!isTyping" class="typing-indicator-placeholder"></div>
+    </div>
+    <div class="char-counter-text" aria-live="polite" aria-atomic="true">
+      {{ chatMessage.length }}/500 Zeichen
+    </div>
   </div>
   
   <div *ngIf="warningMessage" class="alert alert-warning mt-1" role="alert">

@@ -6,6 +6,7 @@ import {
   ElementRef,
   AfterViewInit,
   ViewEncapsulation,
+  Input,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -21,6 +22,8 @@ import { debounceTime } from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None,
 })
 export class ChatBarComponent implements AfterViewInit {
+  @Input() isTyping: boolean = false;
+  @Input() typingUser: string = '';
   @Output() submitMessage = new EventEmitter<string>();
   @Output() typing = new EventEmitter<void>();
   @ViewChild('chatInput') chatInput!: ElementRef<HTMLTextAreaElement>;

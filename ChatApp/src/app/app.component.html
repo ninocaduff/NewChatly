@@ -14,6 +14,8 @@
     ></app-chat-history>
     <div class="spacer-between"></div>
     <app-chat-bar
+      [isTyping]="isTyping"
+      [typingUser]="typingUser"
       (submitMessage)="messageSubmitted($event)"
       (typing)="handleTyping()"
     >
