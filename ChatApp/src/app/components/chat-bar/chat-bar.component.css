@@ -62,7 +62,8 @@
 }
 
 .typing-indicator-placeholder {
-  height: 0; /* Reduziert auf 0, um keinen zusätzlichen Platz einzunehmen */
+  height: 1.2em; /* Reserviert den gleichen Platz wie der Typing-Indikator */
+  visibility: hidden; /* Macht den Platzhalter unsichtbar, behält aber den Platz */
 }
 
 .char-counter-text {
