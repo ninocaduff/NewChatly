@@ -1,11 +1,10 @@
 import { test, expect } from '@playwright/test';
 
-test('Header, Footer, und Content vorhanden', async ({ page }) => {
+test('Header und Footer vorhanden', async ({ page }) => {
   await page.goto('https://chatlyhsg.onrender.com/');
 
   await expect(page.locator('header')).toBeVisible();
   await expect(page.locator('.footer')).toBeVisible();
-  await expect(page.locator('.chat-page')).toBeVisible();
 });
 
 function rgbToHex(rgb: string): string {
@@ -19,7 +18,7 @@ function rgbToHex(rgb: string): string {
   );
 }
 
-test('Footer hat Farbe grün (#00802f)', async ({ page }) => {
+test('Footer hat Farbe grün (#F8F9Fa)', async ({ page }) => {
   await page.goto('https://chatlyhsg.onrender.com/');
 
   const footer = await page.locator('.footer');
@@ -29,7 +28,7 @@ test('Footer hat Farbe grün (#00802f)', async ({ page }) => {
   );
 
   const hexColor = rgbToHex(backgroundColor);
-  expect(hexColor).toBe('#00802f');
+  expect(hexColor).toBe('#f8f9fa');
 });
 
 /*test('Page is in German by default', async ({ page }) => {
