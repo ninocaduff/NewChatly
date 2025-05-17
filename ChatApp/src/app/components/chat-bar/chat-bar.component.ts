@@ -33,8 +33,6 @@ export class ChatBarComponent implements AfterViewInit {
 
   private typingSubject = new Subject<void>();
 
-  constructor() {}
-
   ngAfterViewInit(): void {
     this.focusInput();
 
@@ -56,7 +54,7 @@ export class ChatBarComponent implements AfterViewInit {
         ? 'Die Nachricht darf maximal 500 Zeichen lang sein.'
         : '';
 
-    this.typingSubject.next(); // 🔁 Trigger debounced "typing"
+    this.typingSubject.next();
   }
 
   addMessage(message: string): void {

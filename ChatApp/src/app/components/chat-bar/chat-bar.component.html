@@ -1,7 +1,7 @@
 <div class="chat-bar" role="form" aria-labelledby="chatBarLabel">
   <h2 id="chatBarLabel" class="visually-hidden">Nachrichteneingabe</h2>
   <label for="messageInput" class="visually-hidden">Nachricht eingeben</label>
-  
+
   <div class="textarea-wrapper">
     <textarea
       #chatInput
@@ -16,27 +16,34 @@
       (input)="onInput()"
       aria-required="false"
       aria-multiline="true">
-    </textarea> <!-- Correctly closed tag -->
+    </textarea>
   </div>
 
   <div class="status-row">
-    <div class="typing-indicator-container" aria-live="polite">
-      <div *ngIf="isTyping" class="typing-indicator" [attr.aria-label]="typingUser + ' tippt gerade'">
-        💬 {{ typingUser }} tippt ...
+    <div class="typing-indicator-container" aria-live="polite" aria-atomic="true">
+      <div
+        class="typing-indicator"
+        [class.hidden]="!isTyping"
+        [attr.aria-label]="isTyping ? typingUser + ' tippt gerade' : null"
+        [attr.aria-hidden]="!isTyping ? 'true' : null">
+        💬 {{ isTyping ? typingUser + ' tippt ...' : '' }}
       </div>
-      <div *ngIf="!isTyping" class="typing-indicator-placeholder"></div>
     </div>
-    <div class="char-counter-text" aria-live="polite" aria-atomic="true">
+
+    <div
+      class="char-counter-text"
+      aria-live="polite"
+      aria-atomic="true">
       {{ chatMessage.length }}/500 Zeichen
     </div>
   </div>
-  
+
   <div *ngIf="warningMessage" class="alert alert-warning mt-1" role="alert">
     {{ warningMessage }}
   </div>
 
   <div class="send-button-container">
-    <button 
+    <button
       class="btn btn-success chat-send-button"
       [disabled]="!chatMessage.trim() || chatMessage.length > 500"
       (click)="addMessage(chatMessage)"
